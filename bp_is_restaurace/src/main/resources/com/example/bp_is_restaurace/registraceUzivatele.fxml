@@ -48,7 +48,7 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cb_restaurace" layoutX="201.0" layoutY="394.0" prefHeight="26.0" prefWidth="150.0" />
+      <ComboBox fx:id="cmbox_restaurace" layoutX="201.0" layoutY="394.0" prefHeight="26.0" prefWidth="150.0" />
       <Label layoutX="83.0" layoutY="396.0" text="Restaurace">
          <font>
             <Font name="Arial Black" size="14.0" />

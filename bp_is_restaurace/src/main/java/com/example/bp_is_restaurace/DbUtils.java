@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class DbUtils {
 
 
-    public static void RegistraceNovehoUzivatele(ActionEvent event, Integer idRestaurace, Integer osobniCislo, String heslo, String jmeno, String prijmeni, String pozice){
+    public static boolean registraceNovehoUzivatele(ActionEvent event, Integer idRestaurace, Integer osobniCislo, String heslo, String jmeno, String prijmeni, String pozice){
         Connection spojeni = null;
         PreparedStatement psVloz = null;
         PreparedStatement psOverExistenci = null;
@@ -29,26 +29,31 @@ public class DbUtils {
             vysledekDotazu = psOverExistenci.executeQuery();
 
 
-            if(!vysledekDotazu.isBeforeFirst()){
+            if(vysledekDotazu.isBeforeFirst()){
                 System.out.println("Uzivatel v této restauraci s tímto osobním číslem již existuje");
                 Alert upozorneni = new Alert(Alert.AlertType.ERROR);
                 upozorneni.setContentText("Toto osobní číslo je již zabráno jiným uživatelem, zvolte prosím jiné");
                 upozorneni.show();
+                return false;
+
             }
             else {
-                psVloz = spojeni.prepareStatement("INSERT INTO uzivatele (jmeno, prijmeni, pozice, osobni_cislo, heslo, restaurace_id_restaurace VALUES (?,?,?,?,?,?)");
+                psVloz = spojeni.prepareStatement("INSERT INTO bp_restaurace.uzivatele (jmeno, prijmeni, pozice, osobni_cislo, heslo, restaurace_id_restaurace) VALUES (?,?,?,?,?,?)");
                 psVloz.setString(1,jmeno);
                 psVloz.setString(2,prijmeni);
                 psVloz.setString(3,pozice);
                 psVloz.setInt(4,osobniCislo);
                 psVloz.setString(5,heslo);
                 psVloz.setInt(6,idRestaurace);
+                System.out.println(psVloz);
                 psVloz.executeUpdate();
+                return true;
 
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
 
         finally {
