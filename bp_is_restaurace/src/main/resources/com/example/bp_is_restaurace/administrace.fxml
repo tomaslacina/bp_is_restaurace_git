@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.AdministraceController">
+   <children>
+      <Pane fx:id="zpet" layoutX="-2.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <VBox layoutX="195.0" layoutY="72.0" prefHeight="295.0" prefWidth="210.0">
+               <children>
+                  <Button fx:id="btn_vytvoritUzivatele" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" text="Vytvoření uživatele">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_zmenitHeslo" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" text="Změnit heslo">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btn_editaceUzivatele" layoutX="10.0" layoutY="168.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" text="Editovat uživatele">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <Label layoutX="198.0" layoutY="14.0" text="Administrace">
+               <font>
+                  <Font name="Arial Black" size="28.0" />
+               </font>
+            </Label>
+            <Button fx:id="btn_zpet" layoutX="354.0" layoutY="331.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="239.0" text="Zpět do hlavního menu">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
