@@ -27,6 +27,10 @@ public class RegistrujUzivateleController implements Initializable {
     private ComboBox cmbox_restaurace;
     @FXML
     private Button btn_vytvorUzivatele;
+    @FXML
+    private Button btn_vycistit;
+    @FXML
+    private Button btn_zpet;
 
     private String jmeno;
     private String prijmeni;
@@ -67,7 +71,7 @@ public class RegistrujUzivateleController implements Initializable {
                     upozorneni.setContentText("V poli osobní číslo musí být Číslo, zadej znovu");
                     upozorneni.show();
                     overeniDat=false;
-                    System.out.println("Neplatná hodnota");
+
                 }
 
                 heslo=Zabezpeceni.sha256(psw_heslo.getText());
@@ -101,20 +105,24 @@ public class RegistrujUzivateleController implements Initializable {
                     overeniDat=true;
                 }
             }
+
         });
 
+        btn_vycistit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                tf_jmeno.setText("");
+                tf_prijmeni.setText("");
+                tf_osobniCislo.setText("");
+                psw_heslo.setText("");
+            }
+        });
 
-
-
-
-
-
-
-
-
-
-
-
-
+        btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"administrace.fxml","administrace",400,600);
+            }
+        });
     }
 }

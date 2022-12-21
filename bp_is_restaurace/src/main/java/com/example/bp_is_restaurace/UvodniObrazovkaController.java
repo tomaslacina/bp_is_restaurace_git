@@ -21,6 +21,10 @@ public class UvodniObrazovkaController implements Initializable {
 
     @FXML
     private Label label_prihlaseni;
+    @FXML
+    private Label label_pozice;
+
+
 
 
     @FXML
@@ -42,6 +46,8 @@ public class UvodniObrazovkaController implements Initializable {
         id_uzivatele = DbUtils.getIdPrihlasenehoUzivatele();
         uzivatel = DbUtils.najdiUzivatele(id_uzivatele);
         this.nastavInformace(uzivatel.getJmeno(),uzivatel.getId_uzivatele(),uzivatel.getOsobniCislo());
+        label_pozice.setText(uzivatel.getPozice());
+
 
 
         btn_administrace.setOnAction(new EventHandler<ActionEvent>() {

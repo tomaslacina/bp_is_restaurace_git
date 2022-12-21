@@ -6,12 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 
 public class PrihlaseniController implements Initializable {
@@ -29,6 +31,10 @@ public class PrihlaseniController implements Initializable {
     private Button btn_prihlasitSe;
 
 
+    private boolean overCislo=true;
+    private boolean overeniDat;
+
+    private int osCislo;
 
 
     @Override
@@ -40,15 +46,36 @@ public class PrihlaseniController implements Initializable {
 
 
 
-
         btn_prihlasitSe.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                Integer osCislo = Integer.parseInt(tf_osobniCislo.getText());
-                String heslo = tf_heslo.getText();
+                overCislo = Pattern.matches("\\d+", tf_osobniCislo.getText());
 
-                DbUtils.prihlasitUzivatele(actionEvent,osCislo,1,heslo);
+                if(overCislo==true){
+                    osCislo=Integer.parseInt(tf_osobniCislo.getText());
+                    overeniDat=true;
+                }
+
+                else{
+                    Alert upozorneni = new Alert(Alert.AlertType.ERROR);
+                    upozorneni.setContentText("V poli osobní číslo musí být zadáno ČÍSLO, zadejte znovu!!!");
+                    upozorneni.show();
+                    overeniDat=false;
+                }
+
+                String heslo = tf_heslo.getText();
+                heslo = Zabezpeceni.sha256(heslo);
+
+                if(overeniDat==true){
+                    DbUtils.prihlasitUzivatele(actionEvent,osCislo,1,heslo);
+                }
+                else{
+                    Alert upozorneni = new Alert(Alert.AlertType.ERROR);
+                    upozorneni.setContentText("Byly chybně zadány hodnoty přihlášení, zadejte znovu");
+                    upozorneni.show();
+                }
+
             }
         });
     }

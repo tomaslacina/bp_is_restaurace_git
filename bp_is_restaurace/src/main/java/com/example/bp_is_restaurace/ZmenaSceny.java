@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class ZmenaSceny {
 
-    public static void zmenScenuHlavniMenu(ActionEvent event, String fxmlSoubor, String popisek, int vyska, int sirka, int idUzivatele, String jmenoUzivatele, int osobniCislo){
+    /*public static void zmenScenuHlavniMenu(ActionEvent event, String fxmlSoubor, String popisek, int vyska, int sirka, int idUzivatele, String jmenoUzivatele, int osobniCislo){
         Parent root = null;
 
         if(idUzivatele > 0){
@@ -39,9 +39,7 @@ public class ZmenaSceny {
         stage.setScene(new Scene(root,sirka,vyska));
         stage.show();
 
-    }
-
-
+    }*/
 
     public static void zmenScenu(ActionEvent event, String fxmlSoubor, String popisek, int vyska, int sirka){
         Parent root = null;

@@ -118,11 +118,8 @@ public class DbUtils {
                 while (vysledekDotazu.next()){
                     String hesloDb = vysledekDotazu.getString("heslo");
                     String jmenoDb = vysledekDotazu.getString("jmeno");
-                    String prijmeniDb = vysledekDotazu.getString("prijmeni");
-                    String poziceDb = vysledekDotazu.getString("pozice");
-                    Integer osCisloDb = vysledekDotazu.getInt("osobni_cislo");
                     Integer idUzivateleDb = vysledekDotazu.getInt("id_uzivatele");
-                    Integer idRestauraceDb = vysledekDotazu.getInt("restaurace_id_restaurace");
+
 
                     if(hesloDb.equals(heslo)){
                         ZmenaSceny.zmenScenuUvodniObrazovka(event,"uvodniObrazovka.fxml","Hlavní menu",jmenoDb,idUzivateleDb,osobniCislo);
