@@ -67,6 +67,13 @@ public class UvodniObrazovkaController implements Initializable {
             }
         });
 
+        btn_restaurace.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace - plánek");
+            }
+        });
+
     }
 
     public void nastavInformace(String jmenoUzivatele, Integer idUzivatele, Integer osobniCislo){

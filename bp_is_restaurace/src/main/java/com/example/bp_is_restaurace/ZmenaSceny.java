@@ -57,6 +57,26 @@ public class ZmenaSceny {
 
     }
 
+    public static void zmenScenuRestaurace(ActionEvent event, String fxmlSoubor, String popisek){
+        Parent root = null;
+
+        try {
+            root = FXMLLoader.load(DbUtils.class.getResource(fxmlSoubor));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(popisek);
+        stage.setScene(new Scene(root));
+        stage.setMaximized(true);
+        stage.show();
+
+    }
+
+
+
+
     public static void zmenScenuUvodniObrazovka(ActionEvent event, String fxmlSoubor, String popisek, String jmenoUzivatele, Integer idUzivatele, Integer osobniCislo){
         Parent root = null;
 

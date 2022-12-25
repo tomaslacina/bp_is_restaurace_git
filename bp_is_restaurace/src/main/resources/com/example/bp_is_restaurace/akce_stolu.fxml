@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.AkceStoluController">
+   <children>
+      <Button fx:id="btn_zpet" layoutX="489.0" layoutY="340.0" mnemonicParsing="false" text="Zpět">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="lbl_akce" layoutX="242.0" layoutY="27.0" text="AKCE STOLU">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <VBox layoutX="182.0" layoutY="86.0" prefHeight="243.0" prefWidth="226.0">
+         <children>
+            <Button fx:id="btn_vytvorRezervaci" mnemonicParsing="false" text="VYTVOŘIT REZERVACI">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
