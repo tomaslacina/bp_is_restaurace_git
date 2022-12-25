@@ -319,6 +319,25 @@ public class DbUtils {
         }
     }
 
+    public static void zmenitHesloUzivateli(String noveHeslo, int id_uzivatele){
+
+        Connection spojeni = null;
+        PreparedStatement psZmenaHesla = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psZmenaHesla = spojeni.prepareStatement("UPDATE bp_restaurace.uzivatele SET heslo = ? WHERE id_uzivatele = ?");
+            psZmenaHesla.setString(1,noveHeslo);
+            psZmenaHesla.setInt(2,id_uzivatele);
+            System.out.println(psZmenaHesla);
+            psZmenaHesla.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 
 

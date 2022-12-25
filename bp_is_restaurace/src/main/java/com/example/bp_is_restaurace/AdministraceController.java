@@ -44,6 +44,13 @@ public class AdministraceController implements Initializable {
                 ZmenaSceny.zmenScenu(actionEvent,"registraceUzivatele.fxml","Nový uživatel",500,600);
             }
         });
+
+        btn_zmenitHeslo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"zmenaHesla.fxml","Změna hesla",400,600);
+            }
+        });
     }
 
     public void nastavUzivatele(int idUzivatele){

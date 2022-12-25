@@ -9,7 +9,7 @@
    <children>
       <Pane fx:id="zpet" layoutX="-2.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox layoutX="195.0" layoutY="72.0" prefHeight="295.0" prefWidth="210.0">
+            <VBox layoutX="195.0" layoutY="72.0" prefHeight="224.0" prefWidth="210.0">
                <children>
                   <Button fx:id="btn_vytvoritUzivatele" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" text="Vytvoření uživatele">
                      <opaqueInsets>
