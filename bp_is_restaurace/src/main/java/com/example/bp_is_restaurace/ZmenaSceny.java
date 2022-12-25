@@ -70,6 +70,7 @@ public class ZmenaSceny {
         stage.setTitle(popisek);
         stage.setScene(new Scene(root));
         stage.setMaximized(true);
+        //stage.setFullScreen(true);
         stage.show();
 
     }
