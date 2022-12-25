@@ -78,7 +78,7 @@ public class Uzivatel {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Id:"+id_uzivatele+" - "+jmeno+" "+prijmeni);
+        final StringBuffer sb = new StringBuffer(id_uzivatele+"-"+jmeno+"-"+prijmeni+"-"+osobniCislo);
         //sb.append(", pozice='").append(pozice).append('\'');
         //sb.append(", osobniCislo=").append(osobniCislo);
         //sb.append(", heslo='").append(heslo).append('\'');

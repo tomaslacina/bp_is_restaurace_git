@@ -49,7 +49,7 @@ public class RegistrujUzivateleController implements Initializable {
         cmbox_restaurace.setItems(restaurace);
         cmbox_restaurace.getSelectionModel().selectFirst();
 
-        ObservableList<String> pozice_hodnoty = FXCollections.observableArrayList("Provozní","Obsluha");
+        ObservableList<String> pozice_hodnoty = FXCollections.observableArrayList("Obsluha","Provozní");
         cmbox_pozice.setItems(pozice_hodnoty);
         cmbox_pozice.getSelectionModel().selectFirst();
 

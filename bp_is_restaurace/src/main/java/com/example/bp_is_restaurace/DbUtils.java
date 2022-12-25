@@ -352,7 +352,6 @@ public class DbUtils {
 
             vysledekDotazu = psNajdiUzivatele.executeQuery();
 
-
                 while (vysledekDotazu.next()){
                     String hesloDb = vysledekDotazu.getString("heslo");
                     String jmenoDb = vysledekDotazu.getString("jmeno");
@@ -399,6 +398,31 @@ public class DbUtils {
 
         return seznamUzivatelu;
     }
+
+    public static boolean aktualizujInformaceUzivatel(int id_uzivatele, String jmeno, String prijmeni, String pozice){
+        boolean potvrzeni=false;
+        Connection spojeni = null;
+        PreparedStatement psAktualizujUzivatele = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psAktualizujUzivatele = spojeni.prepareStatement("UPDATE bp_restaurace.uzivatele SET jmeno = ?, prijmeni = ?, pozice=? WHERE id_uzivatele=?");
+            psAktualizujUzivatele.setString(1,jmeno);
+            psAktualizujUzivatele.setString(2,prijmeni);
+            psAktualizujUzivatele.setString(3,pozice);
+            psAktualizujUzivatele.setInt(4,id_uzivatele);
+            System.out.println(psAktualizujUzivatele);
+            psAktualizujUzivatele.executeUpdate();
+            potvrzeni=true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return potvrzeni;
+    }
+
+
+
 
 
 
