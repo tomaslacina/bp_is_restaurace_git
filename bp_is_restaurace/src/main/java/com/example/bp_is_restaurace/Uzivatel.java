@@ -78,15 +78,12 @@ public class Uzivatel {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Uzivatel{");
-        sb.append("id_uzivatele=").append(id_uzivatele);
-        sb.append(", jmeno='").append(jmeno).append('\'');
-        sb.append(", prijmeni='").append(prijmeni).append('\'');
-        sb.append(", pozice='").append(pozice).append('\'');
-        sb.append(", osobniCislo=").append(osobniCislo);
-        sb.append(", heslo='").append(heslo).append('\'');
-        sb.append(", id_restaurace=").append(id_restaurace);
-        sb.append('}');
+        final StringBuffer sb = new StringBuffer("Id:"+id_uzivatele+" - "+jmeno+" "+prijmeni);
+        //sb.append(", pozice='").append(pozice).append('\'');
+        //sb.append(", osobniCislo=").append(osobniCislo);
+        //sb.append(", heslo='").append(heslo).append('\'');
+        //sb.append(", id_restaurace=").append(id_restaurace);
+        //sb.append('}');
         return sb.toString();
     }
 }

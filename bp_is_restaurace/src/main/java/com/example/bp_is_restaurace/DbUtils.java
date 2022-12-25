@@ -1,16 +1,12 @@
 package com.example.bp_is_restaurace;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class DbUtils {
 
@@ -336,6 +332,72 @@ public class DbUtils {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static List <Uzivatel> getSeznamUzivatelu(int id_restaurace){
+        List <Uzivatel> seznamUzivatelu = new ArrayList<>();
+
+        Uzivatel uzivatel;
+        Connection spojeni = null;
+        PreparedStatement psNajdiUzivatele = null;
+        ResultSet vysledekDotazu = null;
+
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiUzivatele = spojeni.prepareStatement("SELECT * from bp_restaurace.uzivatele WHERE restaurace_id_restaurace = ?");
+            psNajdiUzivatele.setInt(1,id_restaurace);
+
+            System.out.println(psNajdiUzivatele);
+
+            vysledekDotazu = psNajdiUzivatele.executeQuery();
+
+
+                while (vysledekDotazu.next()){
+                    String hesloDb = vysledekDotazu.getString("heslo");
+                    String jmenoDb = vysledekDotazu.getString("jmeno");
+                    String prijmeniDb = vysledekDotazu.getString("prijmeni");
+                    String poziceDb = vysledekDotazu.getString("pozice");
+                    Integer osCisloDb = vysledekDotazu.getInt("osobni_cislo");
+                    Integer idUzivateleDb = vysledekDotazu.getInt("id_uzivatele");
+                    Integer idRestauraceDb = vysledekDotazu.getInt("restaurace_id_restaurace");
+                    uzivatel = new Uzivatel(idUzivateleDb,jmenoDb,prijmeniDb,poziceDb,osCisloDb,hesloDb,idRestauraceDb);
+                    seznamUzivatelu.add(uzivatel);
+
+                }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiUzivatele != null){
+                try{
+                    psNajdiUzivatele.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return seznamUzivatelu;
     }
 
 

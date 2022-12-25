@@ -123,8 +123,6 @@ public class ZmenaHeslaController implements Initializable {
                     psw_stare.setText("");
                     psw_nove.setText("");
                     psw_overeni.setText("");
-
-
                 }
 
 
