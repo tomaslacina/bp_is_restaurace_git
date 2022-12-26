@@ -14,37 +14,36 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RezervaceController implements Initializable {
-
-    private HashMap<String,Integer> hashMap_casy = new HashMap<String, Integer>();
-    private String [] poleCasu = {"11:00","11:15","11:30","11:45",
-            "12:00","12:15","12:30","12:45",
-            "13:00","13:15","13:30","13:45",
-            "14:00","14:15","14:30","14:45",
-            "15:00","15:15","15:30","15:45",
-            "16:00","16:15","16:30","16:45",
-            "17:00","17:15","17:30","17:45",
-            "18:00","18:15","18:30","18:45",
-            "19:00","19:15","19:30","19:45",
-            "20:00","20:15","20:30","20:45",
-            "21:00"};
+    List <Rezervace> seznamRezervaci = new ArrayList<>();
+    private final HashMap<String,Integer> hashMap_casy = new HashMap<String,Integer>();
+    private String [] poleCasu = {"11:00:00","11:15:00","11:30:00","11:45:00",
+            "12:00:00","12:15:00","12:30:00","12:45:00",
+            "13:00:00","13:15:00","13:30:00","13:45:00",
+            "14:00:00","14:15:00","14:30:00","14:45:00",
+            "15:00:00","15:15:00","15:30:00","15:45:00",
+            "16:00:00","16:15:00","16:30:00","16:45:00",
+            "17:00:00","17:15:00","17:30:00","17:45:00",
+            "18:00:00","18:15:00","18:30:00","18:45:00",
+            "19:00:00","19:15:00","19:30:00","19:45:00",
+            "20:00:00","20:15:00","20:30:00","20:45:00",
+            "21:00:00"};
 
 
 
     SimpleDateFormat sdf_cas = new SimpleDateFormat("hh:mm:ss");
-    //SimpleDateFormat sdf_casDo = new SimpleDateFormat("hh:mm:ss");
     @FXML
     private Button btn_zpet;
     @FXML
     private Button btn_vytvor;
 
     @FXML
-    private Button btn_vymaz;
+    private Button btn_vymazat;
+
+    @FXML
+    private Button btn_vyberDatum;
 
     @FXML
     private DatePicker dp_datum;
@@ -70,42 +69,89 @@ public class RezervaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn_vytvor.setVisible(false);
+        btn_vymazat.setVisible(false);
+        tf_jmeno.setDisable(true);
+        tf_prijmeni.setDisable(true);
+        tf_kontakt.setDisable(true);
+        tf_poznamka.setDisable(true);
 
         for(int i=0; i<poleCasu.length; i++){
             hashMap_casy.put(poleCasu[i],i);
         }
 
-        //vybrat rezervace
-        //odstranit datumy
-
-
-
-
         ObservableList<String> casy = FXCollections.observableArrayList(
-                "11:00","11:15","11:30","11:45",
-                "12:00","12:15","12:30","12:45",
-                "13:00","13:15","13:30","13:45",
-                "14:00","14:15","14:30","14:45",
-                "15:00","15:15","15:30","15:45",
-                "16:00","16:15","16:30","16:45",
-                "17:00","17:15","17:30","17:45",
-                "18:00","18:15","18:30","18:45",
-                "19:00","19:15","19:30","19:45",
-                "20:00","20:15","20:30","20:45",
-                "21:00");
+                "11:00:00","11:15:00","11:30:00","11:45:00",
+                "12:00:00","12:15:00","12:30:00","12:45:00",
+                "13:00:00","13:15:00","13:30:00","13:45:00",
+                "14:00:00","14:15:00","14:30:00","14:45:00",
+                "15:00:00","15:15:00","15:30:00","15:45:00",
+                "16:00:00","16:15:00","16:30:00","16:45:00",
+                "17:00:00","17:15:00","17:30:00","17:45:00",
+                "18:00:00","18:15:00","18:30:00","18:45:00",
+                "19:00:00","19:15:00","19:30:00","19:45:00",
+                "20:00:00","20:15:00","20:30:00","20:45:00",
+                "21:00:00");
+
         ObservableList<Integer> pocetOsob = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
-
-        cmb_casOd.setItems(casy);
-        cmb_casOd.getSelectionModel().selectFirst();
-
-        cmb_casDo.setItems(casy);
-        cmb_casDo.getSelectionModel().selectFirst();
 
         cmb_pocetOsob.setItems(pocetOsob);
         cmb_pocetOsob.getSelectionModel().selectFirst();
 
         lbl_idStolu.setText(String.valueOf(RestauraceController.id_stolu));
         lbl_idUzivatele.setText(String.valueOf(DbUtils.getIdPrihlasenehoUzivatele()));
+
+        dp_datum.setValue(LocalDate.now());
+
+
+        btn_vyberDatum.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                btn_vytvor.setVisible(true);
+                btn_vymazat.setVisible(true);
+                tf_jmeno.setDisable(false);
+                tf_prijmeni.setDisable(false);
+                tf_kontakt.setDisable(false);
+                tf_poznamka.setDisable(false);
+
+
+                List<String> nedostupne_casy = new ArrayList<>();
+                List <Integer> seznamCisel = new ArrayList<>();
+                int nizsi;
+                int vyssi;
+                Time cas_od;
+                Time cas_do;
+
+                LocalDate datum = dp_datum.getValue();
+                Date date_datum = java.sql.Date.valueOf(datum);
+                seznamRezervaci=DbUtils.getSeznamRezervaciDatum(date_datum,RestauraceController.id_stolu);
+
+                for (Rezervace  rezervace : seznamRezervaci) {
+                    cas_od = rezervace.getCas_od();
+                    cas_do = rezervace.getCas_do();
+                    nizsi=hashMap_casy.get(cas_od.toString());
+                    vyssi=hashMap_casy.get(cas_do.toString());
+
+                    seznamCisel.add(nizsi);
+                    seznamCisel.add(vyssi);
+
+                    for(int i=nizsi+1;i<vyssi;i++){
+                        seznamCisel.add(i);
+                    }
+                }
+
+                for(int i=0;i<seznamCisel.size();i++){
+                    nedostupne_casy.add(poleCasu[seznamCisel.get(i)]);
+                }
+                casy.removeAll(nedostupne_casy);
+                cmb_casOd.setItems(casy);
+                cmb_casOd.getSelectionModel().selectFirst();
+                cmb_casDo.setItems(casy);
+                cmb_casDo.getSelectionModel().selectFirst();
+
+            }
+        });
+
 
         btn_vytvor.setOnAction(new EventHandler<ActionEvent>() {
 

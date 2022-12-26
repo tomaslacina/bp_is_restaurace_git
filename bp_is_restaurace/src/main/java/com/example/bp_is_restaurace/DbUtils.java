@@ -435,8 +435,9 @@ public class DbUtils {
 
         try{
             spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
-            psNajdiRezervace = spojeni.prepareStatement("SELECT * from bp_restaurace.rezervace WHERE datum = ?");
+            psNajdiRezervace = spojeni.prepareStatement("SELECT * from bp_restaurace.rezervace WHERE datum = ? AND stoly_id_stolu = ?");
             psNajdiRezervace.setDate(1,datum);
+            psNajdiRezervace.setInt(2,id_stolu);
 
             System.out.println(psNajdiRezervace);
 
