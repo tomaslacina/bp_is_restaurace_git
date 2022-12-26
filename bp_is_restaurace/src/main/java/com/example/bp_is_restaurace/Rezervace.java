@@ -9,18 +9,20 @@ public class Rezervace {
     private Time cas_od;
     private Time cas_do;
     private String jmeno;
+    private String prijmeni;
     private String kontakt;
     private String poznamka;
     private int pocet_osob;
     private int stoly_id_stolu;
     private int uzivatel_id_uzivatele;
 
-    public Rezervace(int id_rezervace, Date datum, Time cas_od, Time cas_do, String jmeno, String kontakt, String poznamka, int pocet_osob, int stoly_id_stolu, int uzivatel_id_uzivatele) {
+    public Rezervace(int id_rezervace, Date datum, Time cas_od, Time cas_do, String jmeno, String prijmeni,String kontakt, String poznamka, int pocet_osob, int stoly_id_stolu, int uzivatel_id_uzivatele) {
         this.id_rezervace = id_rezervace;
         this.datum = datum;
         this.cas_od = cas_od;
         this.cas_do = cas_do;
         this.jmeno = jmeno;
+        this.prijmeni=prijmeni;
         this.kontakt = kontakt;
         this.poznamka = poznamka;
         this.pocet_osob = pocet_osob;
@@ -46,6 +48,10 @@ public class Rezervace {
 
     public String getJmeno() {
         return jmeno;
+    }
+
+    public String getPrijmeni(){
+        return prijmeni;
     }
 
     public String getKontakt() {
@@ -76,6 +82,7 @@ public class Rezervace {
         sb.append(", cas_od=").append(cas_od);
         sb.append(", cas_do=").append(cas_do);
         sb.append(", jmeno='").append(jmeno).append('\'');
+        sb.append(", prijmeni='").append(prijmeni).append('\'');
         sb.append(", kontakt='").append(kontakt).append('\'');
         sb.append(", poznamka='").append(poznamka).append('\'');
         sb.append(", pocet_osob=").append(pocet_osob);
