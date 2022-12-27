@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="536.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.RezervaceController">
    <children>
-      <Label layoutX="201.0" layoutY="21.0" text="Rezervační formulář">
+      <Label layoutX="242.0" layoutY="14.0" text="Rezervační formulář">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font></Label>
@@ -157,14 +157,14 @@
             </VBox>
          </children>
       </Pane>
-      <ButtonBar layoutX="45.0" layoutY="461.0" prefHeight="40.0" prefWidth="514.0">
+      <ButtonBar layoutX="73.0" layoutY="461.0" prefHeight="40.0" prefWidth="517.0">
         <buttons>
-            <Button fx:id="btn_vymazat" layoutX="381.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="VYMAZAT DATA" textFill="WHITE">
+            <Button fx:id="btn_vymazat" layoutX="381.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: red;" text="VYMAZAT DATA" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_vytvor" layoutX="381.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="198.0" style="-fx-background-color: blue;" text="VYTVOŘIT" textFill="WHITE">
+            <Button fx:id="btn_vytvor" layoutX="381.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="198.0" style="-fx-background-color: green;" text="VYTVOŘIT" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
@@ -176,7 +176,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Button fx:id="btn_vyberDatum" layoutX="508.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: orange;" text="Potvrď datum!" textFill="WHITE">
+      <Button fx:id="btn_vyberDatum" layoutX="508.0" layoutY="68.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" style="-fx-background-color: green;" text="POTVRĎ DATUM !" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>

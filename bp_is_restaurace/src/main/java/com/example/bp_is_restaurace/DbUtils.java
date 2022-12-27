@@ -493,6 +493,172 @@ public class DbUtils {
         return seznamRezervaci;
     }
 
+    public static List <Rezervace> getSeznamVsechRezervaci(){
+        List <Rezervace> seznamRezervaci = new ArrayList<>();
+
+        Rezervace rezervace;
+        Connection spojeni = null;
+        PreparedStatement psNajdiRezervace = null;
+        ResultSet vysledekDotazu = null;
+
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiRezervace = spojeni.prepareStatement("SELECT * from bp_restaurace.rezervace");
+
+
+            System.out.println(psNajdiRezervace);
+
+            vysledekDotazu = psNajdiRezervace.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int id_rezervace = vysledekDotazu.getInt("id_rezervace");
+                Date datum_db = vysledekDotazu.getDate("datum");
+                Time cas_od = vysledekDotazu.getTime("cas_od");
+                Time cas_do = vysledekDotazu.getTime("cas_do");
+                String jmeno = vysledekDotazu.getString("jmeno");
+                String prijmeni = vysledekDotazu.getString("prijmeni");
+                String kontakt = vysledekDotazu.getString("kontakt");
+                String poznamka = vysledekDotazu.getString("poznamka");
+                int pocet_osob = vysledekDotazu.getInt("pocet_osob");
+                int id_stolu_db = vysledekDotazu.getInt("stoly_id_stolu");
+                int id_uzivatele = vysledekDotazu.getInt("uzivatele_id_uzivatele");
+                rezervace = new Rezervace(id_rezervace,datum_db,cas_od,cas_do,jmeno,prijmeni,kontakt,poznamka,pocet_osob,id_stolu_db,id_uzivatele);
+                seznamRezervaci.add(rezervace);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiRezervace != null){
+                try{
+                    psNajdiRezervace.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return seznamRezervaci;
+
+    }
+
+    public static Rezervace getRezervaciById(int idRezervace){
+
+        Rezervace rezervace = new Rezervace(idRezervace,null,null,null,null,null,null,null,0,0,0);
+        Connection spojeni = null;
+        PreparedStatement psNajdiRezervaci = null;
+        ResultSet vysledekDotazu = null;
+
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiRezervaci = spojeni.prepareStatement("SELECT * from bp_restaurace.rezervace WHERE id_rezervace = ?");
+            psNajdiRezervaci.setInt(1,idRezervace);
+
+
+            System.out.println(psNajdiRezervaci);
+
+            vysledekDotazu = psNajdiRezervaci.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int id_rezervace = vysledekDotazu.getInt("id_rezervace");
+                Date datum_db = vysledekDotazu.getDate("datum");
+                Time cas_od = vysledekDotazu.getTime("cas_od");
+                Time cas_do = vysledekDotazu.getTime("cas_do");
+                String jmeno = vysledekDotazu.getString("jmeno");
+                String prijmeni = vysledekDotazu.getString("prijmeni");
+                String kontakt = vysledekDotazu.getString("kontakt");
+                String poznamka = vysledekDotazu.getString("poznamka");
+                int pocet_osob = vysledekDotazu.getInt("pocet_osob");
+                int id_stolu_db = vysledekDotazu.getInt("stoly_id_stolu");
+                int id_uzivatele = vysledekDotazu.getInt("uzivatele_id_uzivatele");
+                rezervace = new Rezervace(id_rezervace,datum_db,cas_od,cas_do,jmeno,prijmeni,kontakt,poznamka,pocet_osob,id_stolu_db,id_uzivatele);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiRezervaci != null){
+                try{
+                    psNajdiRezervaci.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return rezervace;
+
+
+    }
+
+    public static boolean aktualizujRezervaci(int idRezervace, Date datum, String cas_od, String cas_do, String jmeno, String prijmeni, String kontakt, String poznamka, int pocet_osob, int id_uzivatele){
+        boolean potvrzeni=false;
+        Connection spojeni = null;
+        PreparedStatement psAktualizujRezervaci = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psAktualizujRezervaci = spojeni.prepareStatement("UPDATE bp_restaurace.rezervace SET datum = ?, cas_od = ?, cas_do = ?, jmeno =?, prijmeni = ?, kontakt = ?, poznamka = ?, pocet_osob = ?, uzivatele_id_uzivatele = ? WHERE (id_rezervace =?)");
+            psAktualizujRezervaci.setDate(1,datum);
+            psAktualizujRezervaci.setString(2,cas_od);
+            psAktualizujRezervaci.setString(3,cas_do);
+            psAktualizujRezervaci.setString(4,jmeno);
+            psAktualizujRezervaci.setString(5,prijmeni);
+            psAktualizujRezervaci.setString(6,kontakt);
+            psAktualizujRezervaci.setString(7,poznamka);
+            psAktualizujRezervaci.setInt(8,pocet_osob);
+            psAktualizujRezervaci.setInt(9,id_uzivatele);
+            psAktualizujRezervaci.setInt(10,idRezervace);
+            System.out.println(psAktualizujRezervaci);
+            psAktualizujRezervaci.executeUpdate();
+            potvrzeni=true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return potvrzeni;
+    }
+
 
     public static boolean vytvorRezervaci(Date datum, String cas_od, String cas_do, String jmeno, String prijmeni, String kontakt, String poznamka, int pocet_osob, int id_stolu, int id_uzivatele){
         boolean vlozeno=false;
@@ -547,6 +713,25 @@ public class DbUtils {
         return vlozeno;
     }
 
+    public static boolean smazatRezervaci(int id_rezervace){
+        boolean potvrzeni=false;
+        Connection spojeni = null;
+        PreparedStatement psSmazatRezervaci = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psSmazatRezervaci = spojeni.prepareStatement("DELETE FROM bp_restaurace.rezervace WHERE (id_rezervace = ?)");
+            psSmazatRezervaci.setInt(1,id_rezervace);
+            System.out.println(psSmazatRezervaci);
+            psSmazatRezervaci.executeUpdate();
+            potvrzeni=true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return potvrzeni;
+
+    }
 
 
 

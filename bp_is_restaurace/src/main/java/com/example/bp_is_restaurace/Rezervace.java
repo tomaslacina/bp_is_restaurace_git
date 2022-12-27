@@ -76,7 +76,8 @@ public class Rezervace {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Rezervace{");
+        final StringBuffer sb = new StringBuffer(id_rezervace+"-"+jmeno+"-"+prijmeni+"-"+datum);
+        /*final StringBuffer sb = new StringBuffer("Rezervace{");
         sb.append("id_rezervace=").append(id_rezervace);
         sb.append(", datum=").append(datum);
         sb.append(", cas_od=").append(cas_od);
@@ -88,7 +89,7 @@ public class Rezervace {
         sb.append(", pocet_osob=").append(pocet_osob);
         sb.append(", stoly_id_stolu=").append(stoly_id_stolu);
         sb.append(", uzivatel_id_uzivatele=").append(uzivatel_id_uzivatele);
-        sb.append('}');
+        sb.append('}');*/
         return sb.toString();
     }
 }

@@ -80,6 +80,7 @@ public class RezervaceController implements Initializable {
             hashMap_casy.put(poleCasu[i],i);
         }
 
+
         ObservableList<String> casy = FXCollections.observableArrayList(
                 "11:00:00","11:15:00","11:30:00","11:45:00",
                 "12:00:00","12:15:00","12:30:00","12:45:00",
@@ -92,6 +93,7 @@ public class RezervaceController implements Initializable {
                 "19:00:00","19:15:00","19:30:00","19:45:00",
                 "20:00:00","20:15:00","20:30:00","20:45:00",
                 "21:00:00");
+
 
         ObservableList<Integer> pocetOsob = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
 
@@ -154,7 +156,6 @@ public class RezervaceController implements Initializable {
 
 
         btn_vytvor.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent actionEvent) {
                 LocalDate datum = dp_datum.getValue();
@@ -167,17 +168,8 @@ public class RezervaceController implements Initializable {
                 int pocet_osob = (int) cmb_pocetOsob.getValue();
                 int id_stolu = RestauraceController.id_stolu;
                 int id_uzivatele = DbUtils.getIdPrihlasenehoUzivatele();
-               // System.out.println(cas_od);
-                //System.out.println(cas_do);
-                //Time time_cas_od = java.sql.Time.valueOf(cas_od);
-               // Time time_cas_do = java.sql.Time.valueOf(cas_do);
                 Date date_datum = java.sql.Date.valueOf(datum);
 
-                /*if(DbUtils.overDostupnostRezervace(date_datum,cas_od,cas_do,id_stolu)>0){
-                    Alert error = new Alert(Alert.AlertType.ERROR);
-                    error.setContentText("V databázi existuje rezervace pro tento stůl v zadaný čas (nebo v průběhu zadaného rozmezí)");
-                    error.show();
-                }*/
 
                     if(DbUtils.vytvorRezervaci(date_datum,cas_od,cas_do,jmeno,prijmeni,kontakt,poznamka,pocet_osob,id_stolu,id_uzivatele)==true){
                         Alert informace = new Alert(Alert.AlertType.INFORMATION);
@@ -194,8 +186,15 @@ public class RezervaceController implements Initializable {
             }
         });
 
-
-
+        btn_vymazat.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                tf_jmeno.setText("");
+                tf_prijmeni.setText("");
+                tf_kontakt.setText("");
+                tf_poznamka.setText("");
+            }
+        });
 
         btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -204,5 +203,89 @@ public class RezervaceController implements Initializable {
             }
         });
 
+
+
+
     }
+
+    //TODO zkusit změnit čas rezervace
+    public static ObservableList<String> getDostupneCasy(int id_rezervace){
+
+        Rezervace rezervaceDb = DbUtils.getRezervaciById(id_rezervace);
+
+        List <Rezervace> seznamRezervaci = new ArrayList<>();
+        List<String> nedostupne_casy = new ArrayList<>();
+        List <Integer> seznamCisel = new ArrayList<>();
+
+
+
+        HashMap<String,Integer> hashMap_casy = new HashMap<String,Integer>();
+        String [] poleCasu = {"11:00:00","11:15:00","11:30:00","11:45:00",
+                "12:00:00","12:15:00","12:30:00","12:45:00",
+                "13:00:00","13:15:00","13:30:00","13:45:00",
+                "14:00:00","14:15:00","14:30:00","14:45:00",
+                "15:00:00","15:15:00","15:30:00","15:45:00",
+                "16:00:00","16:15:00","16:30:00","16:45:00",
+                "17:00:00","17:15:00","17:30:00","17:45:00",
+                "18:00:00","18:15:00","18:30:00","18:45:00",
+                "19:00:00","19:15:00","19:30:00","19:45:00",
+                "20:00:00","20:15:00","20:30:00","20:45:00",
+                "21:00:00"};
+
+        ObservableList<String> casy = FXCollections.observableArrayList(
+                "11:00:00","11:15:00","11:30:00","11:45:00",
+                "12:00:00","12:15:00","12:30:00","12:45:00",
+                "13:00:00","13:15:00","13:30:00","13:45:00",
+                "14:00:00","14:15:00","14:30:00","14:45:00",
+                "15:00:00","15:15:00","15:30:00","15:45:00",
+                "16:00:00","16:15:00","16:30:00","16:45:00",
+                "17:00:00","17:15:00","17:30:00","17:45:00",
+                "18:00:00","18:15:00","18:30:00","18:45:00",
+                "19:00:00","19:15:00","19:30:00","19:45:00",
+                "20:00:00","20:15:00","20:30:00","20:45:00",
+                "21:00:00");
+
+        int nizsi;
+        int vyssi;
+        Time cas_od;
+        Time cas_do;
+
+        for(int i=0; i<poleCasu.length; i++){
+            hashMap_casy.put(poleCasu[i],i);
+        }
+
+        LocalDate datum = rezervaceDb.getDatum().toLocalDate();
+        Date date_datum = java.sql.Date.valueOf(datum);
+        seznamRezervaci=DbUtils.getSeznamRezervaciDatum(date_datum,rezervaceDb.getStoly_id_stolu());
+
+        for (Rezervace  rezervace : seznamRezervaci) {
+
+            if(rezervace.getId_rezervace()==id_rezervace){
+                System.out.println("Tato rezervace se shoduje se zadanou rezervací");
+
+            }
+            else{
+                cas_od = rezervace.getCas_od();
+                cas_do = rezervace.getCas_do();
+                nizsi=hashMap_casy.get(cas_od.toString());
+                vyssi=hashMap_casy.get(cas_do.toString());
+                seznamCisel.add(nizsi);
+                seznamCisel.add(vyssi);
+
+                for(int i=nizsi+1;i<vyssi;i++){
+                    seznamCisel.add(i);
+                }
+
+            }
+
+        }
+
+        for(int i=0;i<seznamCisel.size();i++){
+            nedostupne_casy.add(poleCasu[seznamCisel.get(i)]);
+        }
+        casy.removeAll(nedostupne_casy);
+        return casy;
+    }
+
+
 }

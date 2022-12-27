@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.SpravaRezervaciController">
+   <children>
+      <Label layoutX="446.0" layoutY="36.0" text="Správa rezervací">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmb_seznamRezervaci" layoutX="54.0" layoutY="80.0" prefHeight="26.0" prefWidth="290.0" />
+      <Button fx:id="btn_vyhledej_ze_seznamu" layoutX="370.0" layoutY="81.0" mnemonicParsing="false" style="-fx-background-color: green;" text="VYHLEDEJ REZERVACI" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="13.0" />
+         </font></Button>
+      <Pane layoutX="54.0" layoutY="151.0" prefHeight="400.0" prefWidth="427.0" style="-fx-background-color: lightgray;">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="125.0">
+               <children>
+                  <Label text="Datum">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="Čas od">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="7.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="34.0" text="Čas do">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="7.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="58.0" text="Jméno">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="7.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="82.0" text="Příjmení">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="7.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="106.0" text="Kontakt">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="7.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="130.0" text="Poznámka">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="7.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="154.0" text="Počet osob">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="7.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="178.0" text="Id stolu">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="202.0" text="Id uživatele">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="334.0" text="Id rezervace">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="142.0" prefHeight="400.0" prefWidth="203.0">
+               <children>
+                  <DatePicker fx:id="dp_datum" prefHeight="26.0" prefWidth="201.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </DatePicker>
+                  <ComboBox fx:id="cmb_cas_od" prefWidth="150.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="cmb_cas_do" layoutX="10.0" layoutY="51.0" prefWidth="150.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <TextField fx:id="tf_jmeno" prefHeight="26.0" prefWidth="194.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin></TextField>
+                  <TextField fx:id="tf_prijmeni" layoutX="10.0" layoutY="121.0" prefHeight="26.0" prefWidth="194.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="tf_kontakt" layoutX="10.0" layoutY="152.0" prefHeight="26.0" prefWidth="194.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="tf_poznamka" layoutX="10.0" layoutY="193.0" prefHeight="26.0" prefWidth="194.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ComboBox fx:id="cmb_pocetOsob" prefWidth="150.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin></ComboBox>
+                  <Label fx:id="lbl_id_stolu" text="Id stolu">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lbl_id_uzivatele" layoutX="10.0" layoutY="300.0" text="Id uživatele">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lbl_id_rezervace" layoutX="10.0" layoutY="334.0" text="Id rezervace">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+               </children></VBox>
+         </children></Pane>
+      <ButtonBar layoutX="128.0" layoutY="559.0" prefHeight="40.0" prefWidth="280.0">
+         <buttons>
+            <Button fx:id="btn_smazat_rezervaci" mnemonicParsing="false" style="-fx-background-color: RED;" text="SMAZAT" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font></Button>
+            <Button fx:id="btn_aktualizuj_rezervaci" mnemonicParsing="false" prefHeight="26.0" prefWidth="213.0" style="-fx-background-color: ORANGE;" text="AKTUALIZUJ" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font></Button>
+         </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>
