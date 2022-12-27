@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -23,17 +24,35 @@ public class SpravaRezervaciController implements Initializable {
     @FXML
     private Button btn_vyhledej_ze_seznamu;
     @FXML
+    private Button btn_vyhledej_datum;
+    @FXML
+    private Button btn_vyhledej_jmeno_primeni;
+    @FXML
+    private Button btn_vyhledej_rezervace_stul;
+    @FXML
     private Button btn_smazat_rezervaci;
     @FXML
     private Button btn_aktualizuj_rezervaci;
+    @FXML
+    private Button btn_vytiskni_rezervace;
     @FXML
     private ComboBox cmb_seznamRezervaci;
     @FXML
     private DatePicker dp_datum;
     @FXML
+    private DatePicker dp_vyhledej_datum_do;
+    @FXML
+    private DatePicker dp_vyhledej_datum_od;
+    @FXML
     private ComboBox cmb_cas_od;
     @FXML
     private ComboBox cmb_cas_do;
+    @FXML
+    private ComboBox cmb_stoly;
+    @FXML
+    private TextField tf_vyhledej_jmeno;
+    @FXML
+    private TextField tf_vyhledej_prijmeni;
     @FXML
     private TextField tf_jmeno;
     @FXML
@@ -51,21 +70,78 @@ public class SpravaRezervaciController implements Initializable {
 
     @FXML
     private Label lbl_id_rezervace;
+    @FXML
+    private TextArea text_area_rezervace;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        //TODO stoly jsou vloženy ručně, v případě změny upravit aby se vyplňovaly automaticky!!!
+        ObservableList<String> stoly = FXCollections.observableArrayList("SALONEK","L1","L2","L3","L4","BAR1","BAR2","BAR3","BAR4","BAR5","BAR6","STRED1","STRED2","STRED3","OKNO1","OKNO2","OKNO3");
+        cmb_stoly.setItems(stoly);
         ObservableList<Integer> pocetOsob = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
         cmb_pocetOsob.setItems(pocetOsob);
-
-
         ObservableList<Rezervace> seznamRezervaci = FXCollections.observableArrayList(seznamRezervaciDb);
         cmb_seznamRezervaci.setItems(seznamRezervaci);
         cmb_seznamRezervaci.getSelectionModel().selectFirst();
         btn_aktualizuj_rezervaci.setVisible(false);
         btn_smazat_rezervaci.setVisible(false);
+        dp_vyhledej_datum_od.setValue(LocalDate.now());
+        dp_vyhledej_datum_do.setValue(LocalDate.now());
+
+        btn_vyhledej_datum.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                LocalDate datum_od = dp_vyhledej_datum_od.getValue();
+                LocalDate datum_do = dp_vyhledej_datum_do.getValue();
+                Date date_datum_od = java.sql.Date.valueOf(datum_od);
+                Date date_datum_do = java.sql.Date.valueOf(datum_do);
+                List<Rezervace> seznamRezervaci = new ArrayList<Rezervace>();
+                text_area_rezervace.setText("");
+                seznamRezervaci=DbUtils.getRezervaceByDatumOdDo(date_datum_od,date_datum_do);
+
+                for (Rezervace rezervace : seznamRezervaci) {
+                    text_area_rezervace.appendText(rezervace.infoRezervace()+"\n");
+                    text_area_rezervace.appendText("------------------------------------------------------------------\n");
+                }
+            }
+        });
+
+        btn_vyhledej_jmeno_primeni.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                String jmeno = tf_vyhledej_jmeno.getText();
+                String prijmeni = tf_vyhledej_prijmeni.getText();
+                List<Rezervace> seznamRezervaci = new ArrayList<Rezervace>();
+                text_area_rezervace.setText("");
+                seznamRezervaci=DbUtils.getRezervaceByJmenoPrijemni(jmeno,prijmeni);
+                text_area_rezervace.appendText("Id\t Datum\t Čas od\t Čas do\t Jméno\t Příjmení \t Kontatk\t Poznámka\t Počet osob\t Stůl\t Uživatel\n");
+                for (Rezervace rezervace : seznamRezervaci) {
+                    text_area_rezervace.appendText(rezervace.infoRezervace()+"\n");
+                }
+
+            }
+        });
+
+        btn_vyhledej_rezervace_stul.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                String stul = cmb_stoly.getValue().toString();
+                List<Rezervace> seznamRezervaci = new ArrayList<Rezervace>();
+                text_area_rezervace.setText("");
+                seznamRezervaci=DbUtils.getRezervaceByStul(stul);
+                text_area_rezervace.appendText("Id\t Datum\t Čas od\t Čas do\t Jméno\t Příjmení \t Kontatk\t Poznámka\t Počet osob\t Stůl\t Uživatel\n");
+                for (Rezervace rezervace : seznamRezervaci) {
+                    text_area_rezervace.appendText(rezervace.infoRezervace()+"\n");
+                }
+
+
+
+            }
+        });
 
         btn_aktualizuj_rezervaci.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -160,8 +236,13 @@ public class SpravaRezervaciController implements Initializable {
             }
         });
 
+        btn_vytiskni_rezervace.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
 
 
+            }
+        });
 
-    }
-}
+
+}}

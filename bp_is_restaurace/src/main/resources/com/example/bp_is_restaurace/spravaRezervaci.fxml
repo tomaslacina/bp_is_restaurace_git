@@ -5,15 +5,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.SpravaRezervaciController">
+<AnchorPane prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.SpravaRezervaciController">
    <children>
-      <Label layoutX="446.0" layoutY="36.0" text="Správa rezervací">
+      <Label layoutX="473.0" layoutY="37.0" text="Správa rezervací">
          <font>
             <Font name="Arial Black" size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmb_seznamRezervaci" layoutX="54.0" layoutY="80.0" prefHeight="26.0" prefWidth="290.0" />
-      <Button fx:id="btn_vyhledej_ze_seznamu" layoutX="370.0" layoutY="81.0" mnemonicParsing="false" style="-fx-background-color: green;" text="VYHLEDEJ REZERVACI" textFill="WHITE">
+      <ComboBox fx:id="cmb_seznamRezervaci" layoutX="54.0" layoutY="94.0" prefHeight="26.0" prefWidth="238.0" />
+      <Button fx:id="btn_vyhledej_ze_seznamu" layoutX="304.0" layoutY="93.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="184.0" style="-fx-background-color: green;" text="VYHLEDEJ REZERVACI" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="13.0" />
          </font></Button>
@@ -189,5 +189,85 @@
                </font></Button>
          </buttons>
       </ButtonBar>
+      <Pane layoutX="514.0" layoutY="84.0" prefHeight="660.0" prefWidth="742.0" style="-fx-background-color: lightgray;">
+         <children>
+            <VBox fx:id="dp_vyhledej_cas_od" layoutX="14.0" layoutY="14.0" prefHeight="160.0" prefWidth="180.0">
+               <children>
+                  <DatePicker fx:id="dp_vyhledej_datum_od" promptText="čas od">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </DatePicker>
+                  <TextField fx:id="tf_vyhledej_jmeno" prefHeight="26.0" prefWidth="147.0" promptText="Jméno">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Vyber stůl ze seznamu">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="198.0" layoutY="14.0" prefHeight="160.0" prefWidth="175.0">
+               <children>
+                  <DatePicker fx:id="dp_vyhledej_datum_do" promptText="čas do">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </DatePicker>
+                  <TextField fx:id="tf_vyhledej_prijmeni" prefHeight="26.0" prefWidth="161.0" promptText="Příjmení">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ComboBox fx:id="cmb_stoly" prefHeight="26.0" prefWidth="190.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+            </VBox>
+            <VBox layoutX="409.0" layoutY="14.0" prefHeight="160.0" prefWidth="227.0">
+               <children>
+                  <Button fx:id="btn_vyhledej_datum" mnemonicParsing="false" style="-fx-background-color: orange;" text="Vyhledej dle DATUMU" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btn_vyhledej_jmeno_primeni" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Vyhledej dle JMÉNA-PŘÍJMENÍ" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btn_vyhledej_rezervace_stul" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Vyhledej dle STOLU" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <TextArea fx:id="text_area_rezervace" layoutX="14.0" layoutY="174.0" prefHeight="386.0" prefWidth="719.0" />
+            <Button fx:id="btn_vytiskni_rezervace" layoutX="537.0" layoutY="585.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="Vytiskni rezervace" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Button>
+            <TextFlow prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

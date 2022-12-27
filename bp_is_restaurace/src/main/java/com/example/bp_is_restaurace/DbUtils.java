@@ -659,7 +659,204 @@ public class DbUtils {
         return potvrzeni;
     }
 
+    public static List <Rezervace> getRezervaceByJmenoPrijemni(String jmeno, String prijmeni){
+        List <Rezervace> seznamRezervaci = new ArrayList<>();
 
+        Rezervace rezervace;
+        Connection spojeni = null;
+        PreparedStatement psNajdiRezervace = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiRezervace = spojeni.prepareStatement("SELECT * from bp_restaurace.rezervace WHERE jmeno = ? AND prijmeni = ?");
+            psNajdiRezervace.setString(1,jmeno);
+            psNajdiRezervace.setString(2,prijmeni);
+            System.out.println(psNajdiRezervace);
+
+            vysledekDotazu = psNajdiRezervace.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int id_rezervace = vysledekDotazu.getInt("id_rezervace");
+                Date datum_db = vysledekDotazu.getDate("datum");
+                Time cas_od = vysledekDotazu.getTime("cas_od");
+                Time cas_do = vysledekDotazu.getTime("cas_do");
+                String jmenoDb = vysledekDotazu.getString("jmeno");
+                String prijmeniDb = vysledekDotazu.getString("prijmeni");
+                String kontakt = vysledekDotazu.getString("kontakt");
+                String poznamka = vysledekDotazu.getString("poznamka");
+                int pocet_osob = vysledekDotazu.getInt("pocet_osob");
+                int id_stolu_db = vysledekDotazu.getInt("stoly_id_stolu");
+                int id_uzivatele = vysledekDotazu.getInt("uzivatele_id_uzivatele");
+                rezervace = new Rezervace(id_rezervace,datum_db,cas_od,cas_do,jmenoDb,prijmeniDb,kontakt,poznamka,pocet_osob,id_stolu_db,id_uzivatele);
+                seznamRezervaci.add(rezervace);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiRezervace != null){
+                try{
+                    psNajdiRezervace.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return seznamRezervaci;
+
+    }
+    public static List <Rezervace> getRezervaceByDatumOdDo(Date datum_od, Date datum_do){
+        List <Rezervace> seznamRezervaci = new ArrayList<>();
+
+        Rezervace rezervace;
+        Connection spojeni = null;
+        PreparedStatement psNajdiRezervace = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiRezervace = spojeni.prepareStatement("SELECT * from bp_restaurace.rezervace WHERE datum >= ? AND datum <=?");
+            psNajdiRezervace.setDate(1,datum_od);
+            psNajdiRezervace.setDate(2,datum_do);
+            System.out.println(psNajdiRezervace);
+
+            vysledekDotazu = psNajdiRezervace.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int id_rezervace = vysledekDotazu.getInt("id_rezervace");
+                Date datum_db = vysledekDotazu.getDate("datum");
+                Time cas_od = vysledekDotazu.getTime("cas_od");
+                Time cas_do = vysledekDotazu.getTime("cas_do");
+                String jmeno = vysledekDotazu.getString("jmeno");
+                String prijmeni = vysledekDotazu.getString("prijmeni");
+                String kontakt = vysledekDotazu.getString("kontakt");
+                String poznamka = vysledekDotazu.getString("poznamka");
+                int pocet_osob = vysledekDotazu.getInt("pocet_osob");
+                int id_stolu_db = vysledekDotazu.getInt("stoly_id_stolu");
+                int id_uzivatele = vysledekDotazu.getInt("uzivatele_id_uzivatele");
+                rezervace = new Rezervace(id_rezervace,datum_db,cas_od,cas_do,jmeno,prijmeni,kontakt,poznamka,pocet_osob,id_stolu_db,id_uzivatele);
+                seznamRezervaci.add(rezervace);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiRezervace != null){
+                try{
+                    psNajdiRezervace.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return seznamRezervaci;
+
+    }
+
+    public static List <Rezervace> getRezervaceByStul(String stul){
+
+        List <Rezervace> seznamRezervaci = new ArrayList<>();
+
+        Rezervace rezervace;
+        Connection spojeni = null;
+        PreparedStatement psNajdiRezervace = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiRezervace = spojeni.prepareStatement("SELECT * from bp_restaurace.rezervace JOIN bp_restaurace.stoly ON stoly_id_stolu=id_stolu WHERE oznaceni = ? ");
+            psNajdiRezervace.setString(1,stul);
+            System.out.println(psNajdiRezervace);
+
+            vysledekDotazu = psNajdiRezervace.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int id_rezervace = vysledekDotazu.getInt("id_rezervace");
+                Date datum_db = vysledekDotazu.getDate("datum");
+                Time cas_od = vysledekDotazu.getTime("cas_od");
+                Time cas_do = vysledekDotazu.getTime("cas_do");
+                String jmenoDb = vysledekDotazu.getString("jmeno");
+                String prijmeniDb = vysledekDotazu.getString("prijmeni");
+                String kontakt = vysledekDotazu.getString("kontakt");
+                String poznamka = vysledekDotazu.getString("poznamka");
+                int pocet_osob = vysledekDotazu.getInt("pocet_osob");
+                int id_stolu_db = vysledekDotazu.getInt("stoly_id_stolu");
+                int id_uzivatele = vysledekDotazu.getInt("uzivatele_id_uzivatele");
+                rezervace = new Rezervace(id_rezervace,datum_db,cas_od,cas_do,jmenoDb,prijmeniDb,kontakt,poznamka,pocet_osob,id_stolu_db,id_uzivatele);
+                seznamRezervaci.add(rezervace);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiRezervace != null){
+                try{
+                    psNajdiRezervace.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return seznamRezervaci;
+
+    }
     public static boolean vytvorRezervaci(Date datum, String cas_od, String cas_do, String jmeno, String prijmeni, String kontakt, String poznamka, int pocet_osob, int id_stolu, int id_uzivatele){
         boolean vlozeno=false;
         Connection spojeni = null;

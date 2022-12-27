@@ -92,4 +92,20 @@ public class Rezervace {
         sb.append('}');*/
         return sb.toString();
     }
+
+    public String infoRezervace() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append("Id rezervace:"+id_rezervace).append("\n");
+        sb.append("Datum:"+datum).append("\t");
+        sb.append("Stůl:"+stoly_id_stolu).append("\n");
+        sb.append("Čas od:"+cas_od).append("\t");
+        sb.append("Čas do"+cas_do).append("\n");
+        sb.append("Jméno:"+jmeno).append("\t");
+        sb.append("Prijmeni: "+prijmeni).append("\n");
+        sb.append("Kontakt: "+kontakt).append("\n");
+        sb.append("Poznámka: "+poznamka).append("\n");
+        sb.append("Počet osob "+pocet_osob).append("\n");
+        sb.append("Rezervaci vytvořil uživatel s ID:"+uzivatel_id_uzivatele).append("\n");
+        return sb.toString();
+    }
 }
