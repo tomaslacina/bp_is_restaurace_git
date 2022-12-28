@@ -36,6 +36,8 @@ public class SpravaRezervaciController implements Initializable {
     @FXML
     private Button btn_vytiskni_rezervace;
     @FXML
+    private Button btn_zpet;
+    @FXML
     private ComboBox cmb_seznamRezervaci;
     @FXML
     private DatePicker dp_datum;
@@ -89,6 +91,13 @@ public class SpravaRezervaciController implements Initializable {
         btn_smazat_rezervaci.setVisible(false);
         dp_vyhledej_datum_od.setValue(LocalDate.now());
         dp_vyhledej_datum_do.setValue(LocalDate.now());
+
+        btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
+            }
+        });
 
         btn_vyhledej_datum.setOnAction(new EventHandler<ActionEvent>() {
 

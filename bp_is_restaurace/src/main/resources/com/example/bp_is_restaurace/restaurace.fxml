@@ -108,9 +108,39 @@
             </Button>
          </children>
       </VBox>
-      <Pane layoutX="482.0" layoutY="14.0" prefHeight="200.0" prefWidth="676.0" style="-fx-background-color: lightgray;">
+      <Pane layoutX="446.0" layoutY="23.0" prefHeight="200.0" prefWidth="736.0" style="-fx-background-color: lightgray;">
          <children>
-            <Button fx:id="btn_sprava_rezervaci" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="SPRÁVA REZERVACÍ" textFill="WHITE">
+            <Button fx:id="btn_sprava_rezervaci" layoutX="23.0" layoutY="57.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="SPRÁVA REZERVACÍ" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_vytvorZakaznika" layoutX="256.0" layoutY="57.0" mnemonicParsing="false" style="-fx-background-color: green;" text="VYTVOŘ ZÁKAZNÍKA" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_sprava_rezervaci11" layoutX="256.0" layoutY="107.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="207.0" style="-fx-background-color: green;" text="ZÁKAZNÍCI" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_sprava_rezervaci12" layoutX="490.0" layoutY="57.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: blue;" text="STAV STOLŮ" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_sprava_rezervaci121" layoutX="490.0" layoutY="107.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: red;" text="POKLADNA" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Button>
+            <Label layoutX="250.0" layoutY="14.0" prefHeight="24.0" prefWidth="301.0" text="Rychlé funkce modulu restaurace">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="btn_sprava_rezervaci2" layoutX="23.0" layoutY="107.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="202.0" style="-fx-background-color: BROWN;" text="PŘÍMÝ PRODEJ" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="16.0" />
                </font>

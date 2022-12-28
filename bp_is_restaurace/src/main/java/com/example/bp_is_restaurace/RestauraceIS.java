@@ -12,7 +12,7 @@ public class RestauraceIS extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RestauraceIS.class.getResource("prihlasovaci-formular-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Prihlaseni!");
+        stage.setTitle("Přihlášení do informačního systému pro malé restaurace");
         stage.setScene(scene);
         stage.show();
     }

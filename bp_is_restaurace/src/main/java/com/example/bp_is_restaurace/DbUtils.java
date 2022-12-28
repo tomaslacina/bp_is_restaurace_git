@@ -404,7 +404,6 @@ public class DbUtils {
         boolean potvrzeni=false;
         Connection spojeni = null;
         PreparedStatement psAktualizujUzivatele = null;
-
         try {
             spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
             psAktualizujUzivatele = spojeni.prepareStatement("UPDATE bp_restaurace.uzivatele SET jmeno = ?, prijmeni = ?, pozice=? WHERE id_uzivatele=?");
@@ -418,7 +417,6 @@ public class DbUtils {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return potvrzeni;
     }
 
@@ -928,6 +926,52 @@ public class DbUtils {
 
         return potvrzeni;
 
+    }
+
+
+    public static boolean vytvorZakaznika(String popis, int id_restaurace){
+        boolean vytvoreno=false;
+        Connection spojeni = null;
+        PreparedStatement psVytvorZakaznika = null;
+        ResultSet vysledekDotazu = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psVytvorZakaznika = spojeni.prepareStatement("INSERT INTO bp_restaurace.zakaznici (oznaceni, restaurace_id_restaurace ) VALUES (?, ?)");
+            psVytvorZakaznika.setString(1,popis);
+            psVytvorZakaznika.setInt(2,id_restaurace);
+            System.out.println(psVytvorZakaznika);
+            psVytvorZakaznika.executeUpdate();
+            vytvoreno=true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psVytvorZakaznika != null){
+                try{
+                    psVytvorZakaznika.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return vytvoreno;
     }
 
 

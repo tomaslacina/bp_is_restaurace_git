@@ -9,9 +9,9 @@
    <children>
       <Pane fx:id="zpet" layoutX="-2.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <VBox layoutX="195.0" layoutY="72.0" prefHeight="224.0" prefWidth="210.0">
+            <VBox layoutX="195.0" layoutY="88.0" prefHeight="224.0" prefWidth="210.0">
                <children>
-                  <Button fx:id="btn_vytvoritUzivatele" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" text="Vytvoření uživatele">
+                  <Button fx:id="btn_vytvoritUzivatele" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: green;" text="Vytvoření uživatele" textFill="WHITE">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -22,7 +22,7 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btn_zmenitHeslo" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" text="Změnit heslo">
+                  <Button fx:id="btn_editaceUzivatele" layoutX="10.0" layoutY="168.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: orange;" text="Editovat uživatele" textFill="WHITE">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -33,7 +33,7 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btn_editaceUzivatele" layoutX="10.0" layoutY="168.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" text="Editovat uživatele">
+                  <Button fx:id="btn_zmenitHeslo" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="206.0" style="-fx-background-color: red;" text="Změnit heslo" textFill="WHITE">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -51,7 +51,7 @@
                   <Font name="Arial Black" size="28.0" />
                </font>
             </Label>
-            <Button fx:id="btn_zpet" layoutX="354.0" layoutY="331.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="239.0" text="Zpět do hlavního menu">
+            <Button fx:id="btn_zpet" layoutX="354.0" layoutY="331.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="239.0" style="-fx-background-color: blue;" text="Zpět do hlavního menu" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

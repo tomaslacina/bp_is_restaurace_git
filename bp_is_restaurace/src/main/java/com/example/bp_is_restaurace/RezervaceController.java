@@ -210,14 +210,10 @@ public class RezervaceController implements Initializable {
 
     //TODO zkusit změnit čas rezervace
     public static ObservableList<String> getDostupneCasy(int id_rezervace){
-
         Rezervace rezervaceDb = DbUtils.getRezervaciById(id_rezervace);
-
         List <Rezervace> seznamRezervaci = new ArrayList<>();
         List<String> nedostupne_casy = new ArrayList<>();
         List <Integer> seznamCisel = new ArrayList<>();
-
-
 
         HashMap<String,Integer> hashMap_casy = new HashMap<String,Integer>();
         String [] poleCasu = {"11:00:00","11:15:00","11:30:00","11:45:00",
@@ -253,16 +249,12 @@ public class RezervaceController implements Initializable {
         for(int i=0; i<poleCasu.length; i++){
             hashMap_casy.put(poleCasu[i],i);
         }
-
         LocalDate datum = rezervaceDb.getDatum().toLocalDate();
         Date date_datum = java.sql.Date.valueOf(datum);
         seznamRezervaci=DbUtils.getSeznamRezervaciDatum(date_datum,rezervaceDb.getStoly_id_stolu());
-
         for (Rezervace  rezervace : seznamRezervaci) {
-
             if(rezervace.getId_rezervace()==id_rezervace){
                 System.out.println("Tato rezervace se shoduje se zadanou rezervací");
-
             }
             else{
                 cas_od = rezervace.getCas_od();
@@ -271,21 +263,15 @@ public class RezervaceController implements Initializable {
                 vyssi=hashMap_casy.get(cas_do.toString());
                 seznamCisel.add(nizsi);
                 seznamCisel.add(vyssi);
-
                 for(int i=nizsi+1;i<vyssi;i++){
                     seznamCisel.add(i);
                 }
-
             }
-
         }
-
         for(int i=0;i<seznamCisel.size();i++){
             nedostupne_casy.add(poleCasu[seznamCisel.get(i)]);
         }
         casy.removeAll(nedostupne_casy);
         return casy;
     }
-
-
 }

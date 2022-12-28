@@ -261,12 +261,16 @@
                </children>
             </VBox>
             <TextArea fx:id="text_area_rezervace" layoutX="14.0" layoutY="174.0" prefHeight="386.0" prefWidth="719.0" />
-            <Button fx:id="btn_vytiskni_rezervace" layoutX="537.0" layoutY="585.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="Vytiskni rezervace" textFill="WHITE">
+            <Button fx:id="btn_vytiskni_rezervace" layoutX="442.0" layoutY="586.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="Vytiskni rezervace" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
-            <TextFlow prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="btn_zpet" layoutX="660.0" layoutY="586.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="Zpět" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>
