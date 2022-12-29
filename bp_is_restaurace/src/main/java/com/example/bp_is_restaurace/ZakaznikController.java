@@ -23,6 +23,12 @@ public class ZakaznikController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int id_restaurace = 1; //TODO v případě více restaurací ošetřit!
 
+        btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
+            }
+        });
         btn_vytvorZakaznika.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -53,6 +59,8 @@ public class ZakaznikController implements Initializable {
 
             }
         });
+
+
 
 
 
