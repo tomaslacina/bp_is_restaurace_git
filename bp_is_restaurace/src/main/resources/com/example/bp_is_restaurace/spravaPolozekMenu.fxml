@@ -5,23 +5,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.SpravaPolozekMenuController">
+<AnchorPane prefHeight="650.0" prefWidth="1000" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.SpravaPolozekMenuController">
    <children>
       <Label layoutX="395.0" layoutY="31.0" text="Správa položek menu">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font>
       </Label>
-      <Pane layoutX="32.0" layoutY="76.0" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
+      <Pane layoutX="32.0" layoutY="77.0" prefHeight="526.0" prefWidth="500.0" style="-fx-background-color: lightgray;">
          <children>
-            <VBox prefHeight="400.0" prefWidth="250.0">
+            <VBox layoutY="28.0" prefHeight="370.0" prefWidth="250.0">
                <children>
                   <Label text="Název*">
                      <font>
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="15.0" />
                      </VBox.margin>
                   </Label>
                   <Label layoutX="10.0" layoutY="10.0" text="Množství">
@@ -29,7 +29,7 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label layoutX="10.0" layoutY="34.0" text="Jednotky">
@@ -37,7 +37,7 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label layoutX="10.0" layoutY="58.0" text="Cena v Kč*">
@@ -45,7 +45,7 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label layoutX="10.0" layoutY="82.0" text="Sazba DPH">
@@ -53,7 +53,7 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label layoutX="10.0" layoutY="106.0" text="Alergeny">
@@ -61,7 +61,7 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label layoutX="10.0" layoutY="130.0" text="Poznámka">
@@ -69,7 +69,7 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label layoutX="10.0" layoutY="154.0" text="Id kategorie menu*">
@@ -77,12 +77,12 @@
                         <Font name="Arial Black" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox layoutX="250.0" prefHeight="400.0" prefWidth="250.0">
+            <VBox layoutX="250.0" layoutY="35.0" prefHeight="370.0" prefWidth="250.0">
                <children>
                   <TextField fx:id="tf_nazev_polozky" promptText="Název položky">
                      <VBox.margin>
@@ -91,12 +91,12 @@
                   </TextField>
                   <TextField fx:id="tf_mnozstvi" layoutX="10.0" layoutY="10.0" promptText="Množství">
                      <VBox.margin>
-                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="8.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </TextField>
                   <ComboBox fx:id="cmb_jednotky" prefHeight="26.0" prefWidth="255.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="8.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </ComboBox>
                   <TextField fx:id="tf_cena" promptText="Cena za kus v KČ">
@@ -126,35 +126,56 @@
                   </ComboBox>
                </children>
             </VBox>
-            <Button fx:id="btn_vytvorPolozku" layoutX="279.0" layoutY="400.0" mnemonicParsing="false" style="-fx-background-color: green;" text="Vytvoř položku menu" textFill="WHITE">
+            <Button fx:id="btn_vytvorPolozku" layoutX="246.0" layoutY="435.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="240.0" style="-fx-background-color: green;" text="Vytvoř položku menu" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Button>
-            <Label layoutX="8.0" layoutY="408.0" text="Položky označené * je nutno vyplnit">
+            <Label layoutX="14.0" layoutY="405.0" text="Položky označené (*) je nutno vyplnit, ostatní jsou volitelné">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="btn_aktualizujPolozku" layoutX="265.0" layoutY="453.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Aktualizuj položku menu" textFill="WHITE">
+            <Button fx:id="btn_aktualizujPolozku" layoutX="246.0" layoutY="479.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="240.0" style="-fx-background-color: orange;" text="Aktualizuj položku menu" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Button>
-         </children>
-      </Pane>
-      <Pane layoutX="566.0" layoutY="76.0" prefHeight="333.0" prefWidth="420.0">
-         <children>
-            <ComboBox fx:id="cmb_kategorieMenuVyhledej" layoutX="14.0" layoutY="76.0" prefHeight="25.0" prefWidth="210.0" promptText="Zvol kategorii" />
-            <ComboBox fx:id="cmb_polozky_kategorie" layoutX="14.0" layoutY="142.0" prefHeight="25.0" prefWidth="210.0" />
-            <Button fx:id="btn_vyberKategorii" layoutX="279.0" layoutY="76.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Zvolit kategorii" />
-            <Button fx:id="btn_vyhledatPolozku" layoutX="279.0" layoutY="142.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Vyhledat položku" />
-            <Label layoutX="154.0" layoutY="14.0" text="Uprav položku menu">
+            <Label layoutX="116.0" layoutY="7.0" text="Informace o položce menu">
                <font>
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
          </children>
       </Pane>
+      <Pane layoutX="566.0" layoutY="76.0" prefHeight="241.0" prefWidth="420.0" style="-fx-background-color: lightgray;">
+         <children>
+            <ComboBox fx:id="cmb_kategorieMenuVyhledej" layoutX="14.0" layoutY="76.0" prefHeight="33.0" prefWidth="210.0" promptText="Zvol kategorii" />
+            <ComboBox fx:id="cmb_polozky_kategorie" layoutX="14.0" layoutY="142.0" prefHeight="33.0" prefWidth="210.0" />
+            <Button fx:id="btn_vyberKategorii" layoutX="238.0" layoutY="76.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="169.0" style="-fx-background-color: green;" text="Zvolit kategorii" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font></Button>
+            <Button fx:id="btn_vyhledatPolozku" layoutX="238.0" layoutY="142.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="169.0" style="-fx-background-color: green;" text="Vyhledat položku" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font></Button>
+            <Label layoutX="124.0" layoutY="14.0" text="Uprav položku menu">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="btn_zpet_nastaveni" layoutX="643.0" layoutY="425.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="266.0" style="-fx-background-color: blue;" text="Zpět do nastavení restaurace" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_zpet_administrace" layoutX="643.0" layoutY="511.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="266.0" style="-fx-background-color: blue;" text="Zpět do administrace" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

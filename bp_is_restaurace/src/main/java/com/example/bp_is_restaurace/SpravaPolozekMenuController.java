@@ -26,6 +26,10 @@ public class SpravaPolozekMenuController implements Initializable {
     private Button btn_vyhledatPolozku;
     @FXML
     private Button btn_vyberKategorii;
+    @FXML
+    private Button btn_zpet_nastaveni;
+    @FXML
+    private Button btn_zpet_administrace;
 
     @FXML
     private TextField tf_nazev_polozky;
@@ -54,6 +58,7 @@ public class SpravaPolozekMenuController implements Initializable {
     String[] poleString;
     private int idKategorie;
     private int idPolozky;
+
 
 
 
@@ -145,6 +150,7 @@ public class SpravaPolozekMenuController implements Initializable {
                             info.setTitle("Úspěch");
                             info.setContentText("Položka menu: "+nazev+" byla vytvořena");
                             info.show();
+                            ZmenaSceny.zmenScenu(actionEvent,"spravaPolozekMenu.fxml","Správa položek menu",600,1000);
                         }
                         else{
                             Alert error = new Alert(Alert.AlertType.ERROR);
@@ -169,6 +175,7 @@ public class SpravaPolozekMenuController implements Initializable {
         btn_vyberKategorii.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                btn_vytvorPolozku.setVisible(false);
                 btn_vyhledatPolozku.setVisible(true);
                 String vybranaKategorie = cmb_kategorieMenuVyhledej.getValue().toString();
                 poleString=vybranaKategorie.split("-");
@@ -185,7 +192,6 @@ public class SpravaPolozekMenuController implements Initializable {
         btn_vyhledatPolozku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                btn_vytvorPolozku.setVisible(false);
                 btn_aktualizujPolozku.setVisible(true);
 
                 PolozkaMenu polozkaMenu;
@@ -291,6 +297,7 @@ public class SpravaPolozekMenuController implements Initializable {
                         info.setTitle("Úspěch");
                         info.setContentText("Položka menu: "+nazev+" byla aktualizována!");
                         info.show();
+                        ZmenaSceny.zmenScenu(actionEvent,"spravaPolozekMenu.fxml","Správa položek menu",600,1000);
                     }
                     else{
                         Alert error = new Alert(Alert.AlertType.ERROR);
@@ -309,6 +316,20 @@ public class SpravaPolozekMenuController implements Initializable {
 
             }
 
+        });
+
+        btn_zpet_nastaveni.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"nastaveniRestaurace.fxml","Nastavení restaurace",500,700);
+            }
+        });
+
+        btn_zpet_administrace.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"administrace.fxml","Administrace",400,600);
+            }
         });
 
 
