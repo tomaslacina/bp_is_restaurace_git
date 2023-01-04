@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="541.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.SpravaKategoriiMenuController">
+   <children>
+      <Label layoutX="209.0" layoutY="27.0" text="Správa kategorií menu">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <Pane layoutX="35.0" layoutY="75.0" prefHeight="134.0" prefWidth="559.0" style="-fx-background-color: lightgray;">
+         <children>
+            <Button fx:id="btn_vytvoritKategoriiMenu" layoutX="423.0" layoutY="70.0" mnemonicParsing="false" style="-fx-background-color: green;" text="Vytvoř kategorii" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <TextField fx:id="tf_nazevNoveKategorie" layoutX="184.0" layoutY="70.0" prefHeight="25.0" prefWidth="220.0" />
+            <Label layoutX="11.0" layoutY="71.0" text="Název nové kategorie">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="170.0" layoutY="22.0" text="Vytvoření nové kategorie">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="35.0" layoutY="246.0" prefHeight="199.0" prefWidth="559.0" style="-fx-background-color: lightgray;">
+         <children>
+            <Button fx:id="btn_vyhledatKategoriiMenu" layoutX="432.0" layoutY="71.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: orange;" text="Vyhledat" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="18.0" layoutY="73.0" text="Zvol kategorii ">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="159.0" layoutY="14.0" text="Editace existující kategorie">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cmb_kategorie" layoutX="184.0" layoutY="71.0" prefHeight="25.0" prefWidth="220.0" />
+            <TextField fx:id="tf_editovanyNazev" layoutX="188.0" layoutY="139.0" prefHeight="25.0" prefWidth="220.0" />
+            <Button fx:id="btn_zmenitNazevKategorie" layoutX="436.0" layoutY="139.0" mnemonicParsing="false" style="-fx-background-color: green;" text="Změnit název" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="18.0" layoutY="140.0" text="Zadej nový název">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="108.0" text="Editovaná kategorie:">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbl_editovana_kategorie" layoutX="188.0" layoutY="108.0" prefHeight="22.0" prefWidth="242.0">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="btn_zpet" layoutX="384.0" layoutY="480.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="Zpět do nastavení restaurace" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -11,7 +11,6 @@ import java.util.List;
 
 public class DbUtils {
 
-
     public static boolean registraceNovehoUzivatele(ActionEvent event, Integer idRestaurace, Integer osobniCislo, String heslo, String jmeno, String prijmeni, String pozice){
         Connection spojeni = null;
         PreparedStatement psVloz = null;
@@ -86,7 +85,6 @@ public class DbUtils {
 
 
     }
-
 
     public static void prihlasitUzivatele(ActionEvent event, Integer osobniCislo, Integer idRestaurace, String heslo){
 
@@ -177,7 +175,6 @@ public class DbUtils {
         }
 
     }
-
 
     public static Uzivatel najdiUzivatele(int id_uzivatele){
         Uzivatel uzivatel = new Uzivatel(0,null,null,null,0,null,0);
@@ -419,7 +416,6 @@ public class DbUtils {
         }
         return potvrzeni;
     }
-
 
     public static List <Rezervace> getSeznamRezervaciDatum(Date datum,int id_stolu){
 
@@ -928,7 +924,6 @@ public class DbUtils {
 
     }
 
-
     public static boolean vytvorZakaznika(String popis, int id_restaurace){
         boolean vytvoreno=false;
         Connection spojeni = null;
@@ -974,6 +969,197 @@ public class DbUtils {
         return vytvoreno;
     }
 
+
+    public static boolean vytvorKategoriiMenu(String nazev, int id_restaurace){
+        boolean vytvoreno=false;
+        Connection spojeni = null;
+        PreparedStatement psVytvorKategoriiMenu = null;
+        ResultSet vysledekDotazu = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psVytvorKategoriiMenu = spojeni.prepareStatement("INSERT INTO bp_restaurace.kategorie_polozky (nazev, restaurace_id_restaurace) VALUES (?,?)");
+            psVytvorKategoriiMenu.setString(1,nazev);
+            psVytvorKategoriiMenu.setInt(2,id_restaurace);
+            System.out.println(psVytvorKategoriiMenu);
+            psVytvorKategoriiMenu.executeUpdate();
+            vytvoreno=true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psVytvorKategoriiMenu != null){
+                try{
+                    psVytvorKategoriiMenu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return vytvoreno;
+    }
+
+    public static boolean overExistenciNazvuKategorieMenu(String nazev, int id_restaurace){
+        boolean shodaNazvu;
+        Connection spojeni = null;
+        PreparedStatement psOverNazev = null;
+        ResultSet vysledekDotazu = null;
+        int pocetVysledku=0;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psOverNazev = spojeni.prepareStatement("SELECT COUNT(id_kategorie) AS pocet FROM bp_restaurace.kategorie_polozky WHERE nazev=? and restaurace_id_restaurace=?");
+            psOverNazev.setString(1,nazev);
+            psOverNazev.setInt(2,id_restaurace);
+            System.out.println(psOverNazev);
+            vysledekDotazu=psOverNazev.executeQuery();
+
+            while (vysledekDotazu.next()){
+                pocetVysledku = vysledekDotazu.getInt("pocet");
+                System.out.println("Počet výsledků:"+pocetVysledku);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psOverNazev != null){
+                try{
+                    psOverNazev.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        if(pocetVysledku==0){
+            shodaNazvu=false; //nenašla se shoda -> false
+        }
+        else{
+            shodaNazvu = true; //našla se shoda názvu ->true
+        }
+
+        return shodaNazvu;
+
+
+
+
+
+    }
+
+    public static List <KategorieMenu> getKategorieMenu(int id_restaurace){
+        List <KategorieMenu> seznamKategoriiMenu = new ArrayList<>();
+        KategorieMenu kategorieMenu;
+        Connection spojeni = null;
+        PreparedStatement psNajdiKategorie = null;
+        ResultSet vysledekDotazu = null;
+
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiKategorie = spojeni.prepareStatement("SELECT * from bp_restaurace.kategorie_polozky WHERE restaurace_id_restaurace=?");
+            psNajdiKategorie.setInt(1,id_restaurace);
+            System.out.println(psNajdiKategorie);
+
+            vysledekDotazu = psNajdiKategorie.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int id_kategorie = vysledekDotazu.getInt("id_kategorie");
+                String nazev = vysledekDotazu.getString("nazev");
+                int id_restaurace_db = vysledekDotazu.getInt("restaurace_id_restaurace");
+                kategorieMenu = new KategorieMenu(id_kategorie,nazev,id_restaurace_db);
+                seznamKategoriiMenu.add(kategorieMenu);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiKategorie != null){
+                try{
+                    psNajdiKategorie.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return seznamKategoriiMenu;
+
+    }
+
+    public static boolean aktualizujInformaceKategorieMenu(int id_kategorie, String novyNazev){
+        boolean aktualizovano = false;
+        Connection spojeni = null;
+        PreparedStatement psAktualizujKategorii = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psAktualizujKategorii = spojeni.prepareStatement("UPDATE bp_restaurace.kategorie_polozky SET nazev = ? WHERE (id_kategorie=?)");
+            psAktualizujKategorii.setString(1,novyNazev);
+            psAktualizujKategorii.setInt(2,id_kategorie);
+            System.out.println(psAktualizujKategorii);
+            psAktualizujKategorii.executeUpdate();
+            aktualizovano=true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return aktualizovano;
+
+    }
 
 
 

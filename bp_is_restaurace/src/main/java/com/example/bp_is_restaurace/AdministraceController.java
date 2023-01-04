@@ -14,18 +14,16 @@ public class AdministraceController implements Initializable {
 
     private Uzivatel uzivatel;
     private int id_uzivatele;
-    @FXML
-    private Button btn_vytvoritUzivatele;
+
 
     @FXML
     private Button btn_zmenitHeslo;
 
     @FXML
-    private Button btn_editaceUzivatele;
-
-    @FXML
     private Button btn_zpet;
 
+    @FXML
+    private Button btn_nastaveniRestaurace;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,13 +36,6 @@ public class AdministraceController implements Initializable {
         });
 
 
-        btn_vytvoritUzivatele.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"registraceUzivatele.fxml","Nový uživatel",500,600);
-            }
-        });
-
         btn_zmenitHeslo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -52,13 +43,13 @@ public class AdministraceController implements Initializable {
             }
         });
 
-
-        btn_editaceUzivatele.setOnAction(new EventHandler<ActionEvent>() {
+        btn_nastaveniRestaurace.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"editaceUzivatele.fxml","Editace uzivatele",400,600);
+                ZmenaSceny.zmenScenu(actionEvent,"nastaveniRestaurace.fxml","Nastavení restaurace",500,700);
             }
         });
+
     }
 
     public void nastavUzivatele(int idUzivatele){
