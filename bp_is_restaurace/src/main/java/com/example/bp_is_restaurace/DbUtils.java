@@ -1161,6 +1161,234 @@ public class DbUtils {
 
     }
 
+    public static boolean vytvorPolozkuMenu(String nazev, int mnozstvi, String jednotky, float cena, float sazbaDph, String alergeny, String poznamka, int id_kategorie_polozky){
+        boolean vytvoreno=false;
+
+        Connection spojeni = null;
+        PreparedStatement psVytvorPolozkuMenu = null;
+        ResultSet vysledekDotazu = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psVytvorPolozkuMenu = spojeni.prepareStatement("INSERT INTO bp_restaurace.polozky_menu (nazev, mnozstvi, jednotky, cena, sazba_dph, alergeny, poznamka, kategorie_polozky_id_kategorie) VALUES (?,?,?,?,?,?,?,?)");
+            psVytvorPolozkuMenu.setString(1,nazev);
+            psVytvorPolozkuMenu.setInt(2,mnozstvi);
+            psVytvorPolozkuMenu.setString(3,jednotky);
+            psVytvorPolozkuMenu.setFloat(4,cena);
+            psVytvorPolozkuMenu.setFloat(5,sazbaDph);
+            psVytvorPolozkuMenu.setString(6,alergeny);
+            psVytvorPolozkuMenu.setString(7,poznamka);
+            psVytvorPolozkuMenu.setInt(8,id_kategorie_polozky);
+            System.out.println(psVytvorPolozkuMenu);
+            psVytvorPolozkuMenu.executeUpdate();
+            vytvoreno=true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psVytvorPolozkuMenu != null){
+                try{
+                   psVytvorPolozkuMenu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return vytvoreno;
+    }
+
+    public static boolean aktualizujPolozkuMenu(int id_polozky, String nazev, int mnozstvi, String jednotky, float cena, float sazbaDph, String alergeny, String poznamka, int id_kategorie_polozky){
+        boolean aktualizovano = false;
+        Connection spojeni = null;
+        PreparedStatement psAktualizujPolozkuMenu = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psAktualizujPolozkuMenu = spojeni.prepareStatement("UPDATE bp_restaurace.polozky_menu SET nazev = ?, mnozstvi=?, jednotky = ?, cena = ?, sazba_dph = ?, alergeny = ?, poznamka = ?, kategorie_polozky_id_kategorie = ? WHERE (id_polozky =?)");
+            psAktualizujPolozkuMenu.setString(1,nazev);
+            psAktualizujPolozkuMenu.setInt(2,mnozstvi);
+            psAktualizujPolozkuMenu.setString(3,jednotky);
+            psAktualizujPolozkuMenu.setFloat(4,cena);
+            psAktualizujPolozkuMenu.setFloat(5,sazbaDph);
+            psAktualizujPolozkuMenu.setString(6,alergeny);
+            psAktualizujPolozkuMenu.setString(7,poznamka);
+            psAktualizujPolozkuMenu.setInt(8,id_kategorie_polozky);
+            psAktualizujPolozkuMenu.setInt(9,id_polozky);
+            System.out.println(psAktualizujPolozkuMenu);
+            psAktualizujPolozkuMenu.executeUpdate();
+            aktualizovano=true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return aktualizovano;
+    }
+
+    public static List <PolozkaMenu> getPolozkyMenuByIdKategorieMenu(int id_kategorieMenu){
+        List<PolozkaMenu> polozkyMenu = new ArrayList<>();
+
+        PolozkaMenu polozkaMenu;
+        Connection spojeni = null;
+        PreparedStatement psNajdePolozkyMenu = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdePolozkyMenu = spojeni.prepareStatement("SELECT * FROM bp_restaurace.polozky_menu where kategorie_polozky_id_kategorie=?");
+            psNajdePolozkyMenu.setInt(1,id_kategorieMenu);
+            System.out.println(psNajdePolozkyMenu);
+
+            vysledekDotazu = psNajdePolozkyMenu.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int idPolozkyMenu=vysledekDotazu.getInt("id_polozky");
+                String nazev = vysledekDotazu.getString("nazev");
+                int mnozstvi = vysledekDotazu.getInt("mnozstvi");
+                String jednotky = vysledekDotazu.getString("jednotky");
+                float cena = vysledekDotazu.getFloat("cena");
+                float sazbaDph = vysledekDotazu.getFloat("sazba_dph");
+                String alergeny = vysledekDotazu.getString("alergeny");
+                String poznamka = vysledekDotazu.getString("poznamka");
+                int idKategoriePolozky = vysledekDotazu.getInt("kategorie_polozky_id_kategorie");
+
+                polozkaMenu = new PolozkaMenu(idPolozkyMenu,nazev,mnozstvi,jednotky,cena,sazbaDph,alergeny, poznamka,idKategoriePolozky);
+                polozkyMenu.add(polozkaMenu);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdePolozkyMenu != null){
+                try{
+                    psNajdePolozkyMenu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return polozkyMenu;
+
+    }
+
+    public static PolozkaMenu getPolozkuMenuByIdPolozky(int id_polozky){
+        PolozkaMenu polozkaMenu=null;
+
+        Connection spojeni = null;
+        PreparedStatement psNajdiPolozkuMenu = null;
+        ResultSet vysledekDotazu = null;
+
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiPolozkuMenu = spojeni.prepareStatement("SELECT * from bp_restaurace.polozky_menu where id_polozky = ?");
+            psNajdiPolozkuMenu.setInt(1,id_polozky);
+
+            System.out.println(psNajdiPolozkuMenu);
+
+            vysledekDotazu = psNajdiPolozkuMenu.executeQuery();
+
+            if(!vysledekDotazu.isBeforeFirst()){
+                System.out.println("Položka menu nebyla nalezena");
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Chyba");
+                error.setContentText("Položka menu nebyla nalezena");
+                error.show();
+                return polozkaMenu;
+            }
+            else {
+                while (vysledekDotazu.next()){
+                   int id=vysledekDotazu.getInt("id_polozky");
+                   String nazev = vysledekDotazu.getString("nazev");
+                   int mnozstvi = vysledekDotazu.getInt("mnozstvi");
+                   String jednotky = vysledekDotazu.getString("jednotky");
+                   float cena = vysledekDotazu.getFloat("cena");
+                   float sazbaDph=vysledekDotazu.getFloat("sazba_dph");
+                   String alergeny = vysledekDotazu.getString("alergeny");
+                   String poznamka = vysledekDotazu.getString("Poznamka");
+                   int idKategorie = vysledekDotazu.getInt("kategorie_polozky_id_kategorie");
+                   polozkaMenu = new PolozkaMenu(id,nazev,mnozstvi,jednotky,cena,sazbaDph,alergeny,poznamka,idKategorie);
+
+                }
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiPolozkuMenu != null){
+                try{
+                    psNajdiPolozkuMenu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+
+
+        return polozkaMenu;
+    }
+
+
+
+
+
 
 
 }

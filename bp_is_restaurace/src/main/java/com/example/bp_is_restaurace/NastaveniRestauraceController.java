@@ -58,6 +58,14 @@ public class NastaveniRestauraceController implements Initializable {
             }
         });
 
+        btn_spravaPolozek.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"spravaPolozekMenu.fxml","Správa položek menu",600,1000);
+            }
+        });
+
+
 
     }
 }

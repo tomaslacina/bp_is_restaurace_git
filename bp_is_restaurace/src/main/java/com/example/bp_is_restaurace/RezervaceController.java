@@ -31,8 +31,6 @@ public class RezervaceController implements Initializable {
             "20:00:00","20:15:00","20:30:00","20:45:00",
             "21:00:00"};
 
-
-
     SimpleDateFormat sdf_cas = new SimpleDateFormat("hh:mm:ss");
     @FXML
     private Button btn_zpet;
