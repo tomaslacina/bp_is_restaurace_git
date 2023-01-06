@@ -1386,9 +1386,209 @@ public class DbUtils {
     }
 
 
+    public static boolean overExistenciPolozkyObjednavky(int id_stolu, int id_polozky_menu){
+        boolean existuje = false;
+
+        Connection spojeni = null;
+        PreparedStatement psOverExistenciObjednavky = null;
+        ResultSet vysledekDotazu = null;
+        int pocetVysledku=0;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psOverExistenciObjednavky = spojeni.prepareStatement("SELECT COUNT(polozky_menu_id_polozky) AS pocet FROM bp_restaurace.objednavky_stul WHERE stoly_id_stolu=? and polozky_menu_id_polozky=?");
+            psOverExistenciObjednavky.setInt(1,id_stolu);
+            psOverExistenciObjednavky.setInt(2,id_polozky_menu);
+            System.out.println(psOverExistenciObjednavky);
+            vysledekDotazu=psOverExistenciObjednavky.executeQuery();
+
+            while (vysledekDotazu.next()){
+                pocetVysledku = vysledekDotazu.getInt("pocet");
+                System.out.println("Počet výsledků - objednávka (existuje stejný počet):"+pocetVysledku);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psOverExistenciObjednavky != null){
+                try{
+                    psOverExistenciObjednavky.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
+        if(pocetVysledku==0){
+           existuje =false; //nenašla se shoda -> false
+        }
+        else{
+            existuje = true; //našla se shoda názvu ->true
+        }
 
+        return existuje;
+    }
+
+    public static ObjednavkaStul getObjednavkaStolu(int id_stolu, int id_polozky_menu){
+        ObjednavkaStul objednavka = null;
+
+        Connection spojeni = null;
+        PreparedStatement psNajdiObjednavku = null;
+        ResultSet vysledekDotazu = null;
+
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiObjednavku = spojeni.prepareStatement("SELECT * from bp_restaurace.objednavky_stul where stoly_id_stolu = ? and polozky_menu_id_polozky=?");
+            psNajdiObjednavku.setInt(1,id_stolu);
+            psNajdiObjednavku.setInt(2,id_polozky_menu);
+
+            System.out.println(psNajdiObjednavku);
+
+            vysledekDotazu = psNajdiObjednavku.executeQuery();
+
+            if(!vysledekDotazu.isBeforeFirst()){
+                System.out.println("Objednávka nebyla nalezena");
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Chyba");
+                error.setContentText("Objednávka nebyla nalezena");
+                error.show();
+                return objednavka;
+            }
+            else {
+                while (vysledekDotazu.next()){
+                    int idObjednavky=vysledekDotazu.getInt("id_objednavky");
+                    int pocetKs = vysledekDotazu.getInt("pocet_ks");
+                    Timestamp datumCasObjednani = vysledekDotazu.getTimestamp("datum_cas_objednani");
+                    int idUzivatele = vysledekDotazu.getInt("uzivatele_id_uzivatele");
+
+                    objednavka = new ObjednavkaStul(idObjednavky,pocetKs,datumCasObjednani,id_stolu,id_polozky_menu,idUzivatele);
+                }
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiObjednavku != null){
+                try{
+                    psNajdiObjednavku.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return objednavka;
+    }
+
+    public static boolean vytvorObjednavkuStolu(int id_stolu, int id_uzivatele, List<ObjednavkaStul> polozkyObjednavky){
+        boolean vytvoreno = false;
+        ObjednavkaStul objednavkaStul;
+        int staryPocet;
+        int novyPocet;
+        Timestamp datumCasVytvoreniObjednavky = new Timestamp(System.currentTimeMillis());
+
+        Connection spojeni = null;
+        PreparedStatement psVytvorObjednavku = null;
+        PreparedStatement psAktualizujObjednavku=null;
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psVytvorObjednavku = spojeni.prepareStatement("INSERT INTO bp_restaurace.objednavky_stul (pocet_ks,datum_cas_objednani,stoly_id_stolu,polozky_menu_id_polozky,uzivatele_id_uzivatele) VALUES (?,?,?,?,?)");
+            psAktualizujObjednavku = spojeni.prepareStatement("UPDATE bp_restaurace.objednavky_stul SET pocet_ks=? WHERE (id_objednavky =?)");
+            for (ObjednavkaStul objednavka: polozkyObjednavky) {
+
+                //pokud neexistuje - vytvor novou
+                if(DbUtils.overExistenciPolozkyObjednavky(id_stolu,objednavka.getIdPolozkyMenu())==false){
+                    psVytvorObjednavku.setInt(1,objednavka.getPocetKs());
+                    psVytvorObjednavku.setTimestamp(2,datumCasVytvoreniObjednavky);
+                    psVytvorObjednavku.setInt(3,id_stolu);
+                    psVytvorObjednavku.setInt(4,objednavka.getIdPolozkyMenu());
+                    psVytvorObjednavku.setInt(5,id_uzivatele);
+                    System.out.println(psVytvorObjednavku);
+                    psVytvorObjednavku.executeUpdate();
+                }
+                //jinak aktualizuj pocet
+                else{
+                    objednavkaStul=DbUtils.getObjednavkaStolu(id_stolu,objednavka.getIdPolozkyMenu());
+                    staryPocet=objednavkaStul.getPocetKs();
+                    novyPocet=staryPocet+objednavka.getPocetKs();
+                    psAktualizujObjednavku.setInt(1,novyPocet);
+                    psAktualizujObjednavku.setInt(2,objednavkaStul.getIdObjednavky());
+                    System.out.println(psAktualizujObjednavku);
+                    psAktualizujObjednavku.executeUpdate();
+
+                }
+
+            }
+            vytvoreno=true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+
+            if(psVytvorObjednavku != null){
+                try{
+                    psVytvorObjednavku.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psAktualizujObjednavku != null){
+                try{
+                    psAktualizujObjednavku.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return vytvoreno;
+    }
 
 
 }

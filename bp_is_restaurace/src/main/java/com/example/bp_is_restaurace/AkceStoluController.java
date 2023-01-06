@@ -16,6 +16,8 @@ public class AkceStoluController implements Initializable {
     @FXML
     private Button btn_vytvorRezervaci;
     @FXML
+    private Button btn_objednavky;
+    @FXML
     private Label lbl_akce;
 
     @Override
@@ -34,6 +36,13 @@ public class AkceStoluController implements Initializable {
             public void handle(ActionEvent actionEvent) {
                 ZmenaSceny.zmenScenu(actionEvent,"formularRezervace.fxml","Rezervační formulář",600,600);
 
+            }
+        });
+
+        btn_objednavky.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"objednavkaStul.fxml","Objednávky pro stůl",750,1500);
             }
         });
 

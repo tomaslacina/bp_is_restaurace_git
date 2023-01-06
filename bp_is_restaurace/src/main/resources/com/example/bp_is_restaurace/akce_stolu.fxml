@@ -17,9 +17,9 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Label>
-      <VBox layoutX="182.0" layoutY="86.0" prefHeight="243.0" prefWidth="226.0">
+      <VBox layoutX="165.0" layoutY="71.0" prefHeight="280.0" prefWidth="259.0">
          <children>
-            <Button fx:id="btn_vytvorRezervaci" mnemonicParsing="false" prefHeight="35.0" prefWidth="228.0" style="-fx-background-color: orange;" text="VYTVOŘIT REZERVACI" textFill="WHITE">
+            <Button fx:id="btn_vytvorRezervaci" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: orange;" text="VYTVOŘIT REZERVACI" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="16.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_vytvorRezervaci1" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="231.0" style="-fx-background-color: green;" text="OBJEDNÁVKY" textFill="WHITE">
+            <Button fx:id="btn_objednavky" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: green;" text="OBJEDNÁVKY" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="16.0" />
                </font>
@@ -35,7 +35,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_vytvorRezervaci11" layoutX="10.0" layoutY="66.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="PLATBA ZA CELÝ STŮL" textFill="WHITE">
+            <Button fx:id="btn_objednavky1" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: darkgreen;" text="PŘEHLED OBJEDNÁVEK" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="16.0" />
                </font>
@@ -43,7 +43,15 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_vytvorRezervaci111" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="226.0" style="-fx-background-color: darkblue;" text="PLATBA JEDNOTLIVĚ" textFill="WHITE">
+            <Button fx:id="btn_vytvorRezervaci11" layoutX="10.0" layoutY="66.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: blue;" text="PLATBA ZA CELÝ STŮL" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btn_vytvorRezervaci111" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: darkblue;" text="PLATBA JEDNOTLIVĚ" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="16.0" />
                </font>

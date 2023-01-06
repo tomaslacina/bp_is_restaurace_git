@@ -87,6 +87,7 @@ public class SpravaPolozekMenuController implements Initializable {
 
 
 
+
         btn_vytvorPolozku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
