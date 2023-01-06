@@ -29,6 +29,12 @@ public class ObjednavkaStul {
         this.idUzivatele = idUzivatele;
     }
 
+    public ObjednavkaStul(int idObjednavky, String nazevPolozky, int pocetKs){
+        this.idObjednavky=idObjednavky;
+        this.nazevPolozky=nazevPolozky;
+        this.pocetKs=pocetKs;
+    }
+
     public int getPocetKs() {
         return pocetKs;
     }
@@ -46,10 +52,16 @@ public class ObjednavkaStul {
     }
     public void zmensiPocetKs1(){this.pocetKs-=1;}
 
-    @Override
-    public String toString() {
+
+    public String info() {
         StringBuffer sb = new StringBuffer();
         sb.append("Id položky menu:"+idPolozkyMenu+"\t"+nazevPolozky+"\t\t"+pocetKs+" Ks\t\n");
+        return sb.toString();
+    }
+
+    @Override
+    public String toString(){
+        final StringBuffer sb = new StringBuffer(idObjednavky+"-"+nazevPolozky+"-"+pocetKs);
         return sb.toString();
     }
 }

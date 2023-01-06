@@ -215,7 +215,7 @@ public class ObjednavkaStulController implements Initializable {
     public void vytiskniSeznamObjednavky(){
         ta_objednavka.setText("");
         for (ObjednavkaStul objednavka: seznamPolozekObjednavky) {
-            ta_objednavka.appendText(objednavka.toString());
+            ta_objednavka.appendText(objednavka.info());
         }
 
     }

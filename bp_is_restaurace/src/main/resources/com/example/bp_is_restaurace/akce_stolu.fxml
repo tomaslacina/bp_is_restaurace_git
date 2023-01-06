@@ -35,7 +35,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btn_objednavky1" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: darkgreen;" text="PŘEHLED OBJEDNÁVEK" textFill="WHITE">
+            <Button fx:id="btn_prehledObjednavek" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: darkgreen;" text="PŘEHLED OBJEDNÁVEK" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="16.0" />
                </font>

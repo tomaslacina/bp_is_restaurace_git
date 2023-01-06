@@ -1517,6 +1517,67 @@ public class DbUtils {
         return objednavka;
     }
 
+    public static List<ObjednavkaStul> getObjednavkyStoluByIdStolu(int id_stolu){
+        List<ObjednavkaStul> seznamObjednavek = new ArrayList<>();
+
+        ObjednavkaStul objednavka;
+        Connection spojeni = null;
+        PreparedStatement psNajdiObjednavkyStolu = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiObjednavkyStolu = spojeni.prepareStatement("SELECT id_objednavky, nazev, pocet_ks FROM bp_restaurace.objednavky_stul JOIN bp_restaurace.polozky_menu ON polozky_menu_id_polozky = id_polozky WHERE stoly_id_stolu=?");
+            psNajdiObjednavkyStolu.setInt(1,id_stolu);
+            System.out.println(psNajdiObjednavkyStolu);
+
+            vysledekDotazu = psNajdiObjednavkyStolu.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int idObjednavky = vysledekDotazu.getInt("id_objednavky");
+                int pocetKs = vysledekDotazu.getInt("pocet_ks");
+                String nazevPolozky=vysledekDotazu.getString("nazev");
+
+                objednavka = new ObjednavkaStul(idObjednavky,nazevPolozky,pocetKs);
+                seznamObjednavek.add(objednavka);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiObjednavkyStolu != null){
+                try{
+                    psNajdiObjednavkyStolu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return seznamObjednavek;
+    }
+
+    //TODO: aktualizuj pocet
+    //TODO: smazat polozku z objednavky (1ks)
+    //TODO: zamena objednavek stolu - stary -> novy
+
     public static boolean vytvorObjednavkuStolu(int id_stolu, int id_uzivatele, List<ObjednavkaStul> polozkyObjednavky){
         boolean vytvoreno = false;
         ObjednavkaStul objednavkaStul;
