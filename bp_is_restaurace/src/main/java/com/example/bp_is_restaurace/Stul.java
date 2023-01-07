@@ -31,12 +31,13 @@ public class Stul {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Stul{");
-        sb.append("id_stolu=").append(id_stolu);
-        sb.append(", oznaceni='").append(oznaceni).append('\'');
+        final StringBuffer sb = new StringBuffer();
+        sb.append(id_stolu+"-"+oznaceni);
+        //sb.append("id_stolu=").append(id_stolu);
+        /*sb.append(", oznaceni='").append(oznaceni).append('\'');
         sb.append(", pocet_zidli=").append(pocet_zidli);
         sb.append(", restaurace_id_restaurace=").append(restaurace_id_restaurace);
-        sb.append('}');
+        sb.append('}');*/
         return sb.toString();
     }
 }

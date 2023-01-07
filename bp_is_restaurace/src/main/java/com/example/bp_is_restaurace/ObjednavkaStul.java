@@ -59,6 +59,12 @@ public class ObjednavkaStul {
         return sb.toString();
     }
 
+    public String infoPrehled() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Počet kusů:"+pocetKs+" Ks\t"+nazevPolozky+"\t\t(objednávka id:"+idObjednavky+")\n");
+        return sb.toString();
+    }
+
     @Override
     public String toString(){
         final StringBuffer sb = new StringBuffer(idObjednavky+"-"+nazevPolozky+"-"+pocetKs);
