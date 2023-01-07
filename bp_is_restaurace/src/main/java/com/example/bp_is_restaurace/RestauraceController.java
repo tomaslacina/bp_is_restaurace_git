@@ -53,6 +53,9 @@ public class RestauraceController implements Initializable {
     @FXML
     private Button btn_vytvorZakaznika;
 
+    @FXML
+    private Button btn_zakaznici;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -206,6 +209,15 @@ public class RestauraceController implements Initializable {
                 ZmenaSceny.zmenScenu(actionEvent,"zakaznik.fxml","Zákazníci",400,600);
             }
         });
+
+        btn_zakaznici.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"zakazniciRestaurace.fxml","Zákazníci restaurace",600,800);
+            }
+        });
+
+
 
 
     }

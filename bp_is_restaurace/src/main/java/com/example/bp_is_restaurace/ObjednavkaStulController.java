@@ -231,7 +231,7 @@ public class ObjednavkaStulController implements Initializable {
         sb_informace.append("6. Po stisknutí tlačítka <<Korekce>> se aktivuje funkce storno položky (-1ks)\n");
         sb_informace.append("7. Poté stačí kliknout na potřebnou položku (jako při objednání) \n a z původní objednávky se tato položka odstraní\n");
         sb_informace.append("8. Pro korekci další položky je nutné postupovat od kroku číslo 6.\n");
-        sb_informace.append("9. Aktivovanou funkci <<Korekce>> lze vypnout stiskem tlačítka <<Zrušit korekci>>");
+        sb_informace.append("9. Aktivovanou funkci <<Korekce>> lze vypnout stiskem tlačítka <<Zrušit korekci>>\n");
         sb_informace.append("10. Je-li objednávka správně vyplněna, kliknutím na tlačíko <<Vytvořit objednávku>> \n ji uložíte do databáze\n");
         return sb_informace.toString();
     }

@@ -52,7 +52,7 @@ public class AkceStoluController implements Initializable {
         btn_prehledObjednavek.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1200);
+                ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1500);
             }
         });
 

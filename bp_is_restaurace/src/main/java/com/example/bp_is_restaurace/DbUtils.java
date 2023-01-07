@@ -1763,4 +1763,58 @@ public class DbUtils {
         }
         return seznamStolu;
     }
+
+    public static List<Zakaznik> getSeznamZakazniku(int id_restaurace){
+        List<Zakaznik> seznamZakazniku = new ArrayList<>();
+
+        Zakaznik zakaznik;
+        Connection spojeni = null;
+        PreparedStatement psSeznamZakazniku = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psSeznamZakazniku = spojeni.prepareStatement("SELECT * FROM bp_restaurace.zakaznici  WHERE restaurace_id_restaurace=?");
+            psSeznamZakazniku.setInt(1,id_restaurace);
+            System.out.println(psSeznamZakazniku);
+
+            vysledekDotazu = psSeznamZakazniku.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int id_zakaznika = vysledekDotazu.getInt("id_zakaznika");
+                String oznaceni = vysledekDotazu.getString("oznaceni");
+                zakaznik = new Zakaznik(id_zakaznika,oznaceni,id_restaurace);
+                seznamZakazniku.add(zakaznik);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if(psSeznamZakazniku != null){
+                try{
+                    psSeznamZakazniku.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return seznamZakazniku;
+    }
 }
