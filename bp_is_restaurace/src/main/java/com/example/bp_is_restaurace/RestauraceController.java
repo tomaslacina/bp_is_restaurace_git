@@ -59,6 +59,7 @@ public class RestauraceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        id_stolu=0;//neni nic vybrano
 
         btn_sprava_rezervaci.setOnAction(new EventHandler<ActionEvent>() {
             @Override

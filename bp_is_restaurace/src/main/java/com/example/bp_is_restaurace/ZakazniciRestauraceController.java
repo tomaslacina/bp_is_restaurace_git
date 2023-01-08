@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ZakazniciRestauraceController implements Initializable {
-    public int id_zakaznika;
+    public static int id_zakaznika;
     private int id_restaurace=1;//TODO v případě více restaurací,...
     private int pocitadloRadky;
     private int pocitadloSloupce;
@@ -40,7 +40,7 @@ public class ZakazniciRestauraceController implements Initializable {
             tlacitko.setText(zakaznik.getOznaceni()+"\n(ID:"+zakaznik.getId_zakaznika()+")");
             tlacitko.setPrefHeight(100);
             tlacitko.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            tlacitko.setMinWidth(200);
+            tlacitko.setMinWidth(180);
             tlacitko.setFont(fontTlacitko);
             tlacitko.setStyle("-fx-background-color: darkgreen;");
             tlacitko.setTextFill(Color.WHITE);
@@ -49,6 +49,7 @@ public class ZakazniciRestauraceController implements Initializable {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     id_zakaznika=zakaznik.getId_zakaznika();
+                    ZmenaSceny.zmenScenu(actionEvent,"akceZakaznika.fxml","Akce zákazníka",600,800);
                 }
             });
             seznamTlacitekZakaznici.add(tlacitko);

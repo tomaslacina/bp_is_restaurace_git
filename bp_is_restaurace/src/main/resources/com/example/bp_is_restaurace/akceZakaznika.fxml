@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.AkceZakaznikaController">
+    <children>
+        <Button fx:id="btn_zpet" layoutX="450.0" layoutY="340.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: gray;" text="Zpět" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Button>
+        <Label fx:id="lbl_akce" layoutX="216.0" layoutY="28.0" text="AKCE ZÁKAZNÍKA ">
+            <font>
+                <Font name="Arial Black" size="16.0" />
+            </font>
+        </Label>
+        <VBox layoutX="165.0" layoutY="71.0" prefHeight="280.0" prefWidth="259.0">
+            <children>
+                <Button fx:id="btn_objednavka" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: green;" text="OBJEDNÁVKA" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="btn_prehledObjednavek" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: darkgreen;" text="PŘEHLED OBJEDNÁVEK" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="btn_platba" layoutX="10.0" layoutY="66.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: blue;" text="ZAPLATIT OBJEDNÁVKY" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="16.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

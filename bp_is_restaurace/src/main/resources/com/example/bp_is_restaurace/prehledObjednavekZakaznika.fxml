@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="750" prefWidth="1500.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.PrehledObjednavekZakaznikaController">
+    <children>
+        <Label layoutX="584.0" layoutY="23.0" text="Přehled objednávek zákazníka">
+            <font>
+                <Font name="Arial Black" size="24.0" />
+            </font>
+        </Label>
+        <TextArea fx:id="ta_prehled" editable="false" layoutX="28.0" layoutY="88.0" prefHeight="635.0" prefWidth="712.0">
+            <font>
+                <Font name="Arial Black" size="14.0" />
+            </font></TextArea>
+        <Pane layoutX="777.0" layoutY="88.0" prefHeight="234.0" prefWidth="603.0" style="-fx-background-color: lightgray;">
+            <children>
+                <Label layoutX="14.0" layoutY="56.0" text="Zvolte objednávku k editaci">
+                    <font>
+                        <Font name="Arial Black" size="14.0" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="cmb_objednavky" layoutX="236.0" layoutY="56.0" prefHeight="25.0" prefWidth="188.0" />
+                <Button fx:id="btn_zvolit_objednavku" layoutX="448.0" layoutY="55.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: GREEN;" text="Zvolit objednávku" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Label layoutX="14.0" layoutY="131.0" prefHeight="22.0" prefWidth="139.0" text="Zadej nový počet">
+                    <font>
+                        <Font name="Arial Black" size="14.0" />
+                    </font>
+                </Label>
+                <Spinner fx:id="spinner_novy_pocet" layoutX="236.0" layoutY="130.0" prefHeight="25.0" prefWidth="188.0" />
+                <Button fx:id="btn_novy_pocet" layoutX="445.0" layoutY="129.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: orange;" text="Zadat nový počet" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+                <Label layoutX="172.0" layoutY="14.0" text="Editace zvolené objednávky">
+                    <font>
+                        <Font name="Arial Black" size="16.0" />
+                    </font>
+                </Label>
+                <Separator layoutY="182.0" prefHeight="1.0" prefWidth="603.0" />
+                <Button fx:id="btn_storno" layoutX="152.0" layoutY="194.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="299.0" style="-fx-background-color: RED;" text="STORNO CELÉ POLOŽKY Z OBJEDNÁVKY" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+        <Button fx:id="btn_zpet" layoutX="1200.0" layoutY="672.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: blue;" text="Zpět do restaurace" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="btn_info" layoutX="989.0" layoutY="672.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: gray;" text="Informace k modulu" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="btn_zobraz_objednavky" layoutX="777.0" layoutY="672.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: green;" text="Zobraz objednávky" textFill="WHITE">
+            <font>
+                <Font name="Arial Black" size="12.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

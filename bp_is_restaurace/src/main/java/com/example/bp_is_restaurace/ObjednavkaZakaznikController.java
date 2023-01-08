@@ -17,10 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ObjednavkaStulController implements Initializable {
+public class ObjednavkaZakaznikController implements Initializable {
     @FXML
     private VBox vbox_menu;
-
     @FXML
     private Label lbl_vybranaPolozka;
     @FXML
@@ -47,7 +46,7 @@ public class ObjednavkaStulController implements Initializable {
     private List<KategorieMenu> seznamKategoriiMenu = new ArrayList<>();
     private List<PolozkaMenu> seznamPolozekMenu = new ArrayList<>();
 
-    private List<ObjednavkaStul> seznamPolozekObjednavky = new ArrayList<>();
+    private List<ObjednavkaZakaznik> seznamPolozekObjednavky = new ArrayList<>();
 
     private int id_kategorie;
     private int id_polozky;
@@ -154,40 +153,39 @@ public class ObjednavkaStulController implements Initializable {
         btn_vytvorObjednavku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                int id_stolu =RestauraceController.id_stolu;
+                int id_zakaznika =ZakazniciRestauraceController.id_zakaznika;
                 int id_uzivatele = DbUtils.getIdPrihlasenehoUzivatele();
 
-                    if(DbUtils.vytvorObjednavkuStolu(id_stolu,id_uzivatele,seznamPolozekObjednavky)==true){
-                        Alert info = new Alert(Alert.AlertType.INFORMATION);
-                        info.setTitle("Úspěch");
-                        info.setContentText("Objednávka pro stůl:"+id_stolu+" byla úspěšně vytvořena");
-                        info.show();
-                        ZmenaSceny.zmenScenu(actionEvent,"restaurace.fxml","Restaurace",750,1200);
-                    }
-                    else{
-                        Alert error = new Alert(Alert.AlertType.ERROR);
-                        error.setTitle("Chyba");
-                        error.setContentText("Nastala neočekávaná chyba");
-                        error.show();
+                if(DbUtils.vytvorObjednavkuZakaznika(id_zakaznika,id_uzivatele,seznamPolozekObjednavky)==true){
+                    Alert info = new Alert(Alert.AlertType.INFORMATION);
+                    info.setTitle("Úspěch");
+                    info.setContentText("Objednávka pro zákazníka:"+id_zakaznika+" byla úspěšně vytvořena");
+                    info.show();
+                    ZmenaSceny.zmenScenu(actionEvent,"restaurace.fxml","Restaurace",750,1200);
+                }
+                else{
+                    Alert error = new Alert(Alert.AlertType.ERROR);
+                    error.setTitle("Chyba");
+                    error.setContentText("Nastala neočekávaná chyba");
+                    error.show();
 
-                    }
+                }
             }
         });
 
     }
 
 
-
     public void vlozObjednavkuDoSeznamu(int id_polozky, String nazev){
         boolean shoda = false;
 
         if(seznamPolozekObjednavky.isEmpty()==true){
-            seznamPolozekObjednavky.add(new ObjednavkaStul(1,id_polozky,nazev));
+            seznamPolozekObjednavky.add(new ObjednavkaZakaznik(id_polozky,1,nazev));
             shoda=true; //pri prvnim vlozeni do seznamu
 
         }
         else {
-            for (ObjednavkaStul objednavka: seznamPolozekObjednavky) {
+            for (ObjednavkaZakaznik objednavka: seznamPolozekObjednavky) {
                 if(objednavka.getIdPolozkyMenu()==id_polozky&&korekce==false){
                     objednavka.zvysPocetKs1();
                     shoda=true;
@@ -208,14 +206,14 @@ public class ObjednavkaStulController implements Initializable {
         }
 
         if(shoda==false){
-            seznamPolozekObjednavky.add(new ObjednavkaStul(1,id_polozky,nazev));
+            seznamPolozekObjednavky.add(new ObjednavkaZakaznik(id_polozky,1,nazev));
         }
 
     }
 
     public void vytiskniSeznamObjednavky(){
         ta_objednavka.setText("");
-        for (ObjednavkaStul objednavka: seznamPolozekObjednavky) {
+        for (ObjednavkaZakaznik objednavka: seznamPolozekObjednavky) {
             ta_objednavka.appendText(objednavka.info());
         }
 

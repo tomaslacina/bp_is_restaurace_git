@@ -34,12 +34,12 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="976.0" layoutY="88.0" text="Poslední vybraná položka:">
+      <Label layoutX="974.0" layoutY="28.0" text="Poslední vybraná položka:">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_vybranaPolozka" layoutX="1219.0" layoutY="88.0">
+      <Label fx:id="lbl_vybranaPolozka" layoutX="1217.0" layoutY="28.0">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -49,14 +49,14 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Button>
-      <TextArea fx:id="ta_objednavka" editable="false" layoutX="997.0" layoutY="142.0" prefHeight="231.0" prefWidth="474.0">
+      <TextArea fx:id="ta_objednavka" editable="false" layoutX="997.0" layoutY="90.0" prefHeight="231.0" prefWidth="474.0">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></TextArea>
       <GridPane fx:id="gp_tabulkaTlacitek" layoutX="274.0" layoutY="173.0">
 
       </GridPane>
-      <Label layoutX="1123.0" layoutY="118.0" prefHeight="24.0" prefWidth="222.0" text="Přehled nové objednávky">
+      <Label layoutX="1123.0" layoutY="66.0" prefHeight="24.0" prefWidth="222.0" text="Přehled nové objednávky">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font>
