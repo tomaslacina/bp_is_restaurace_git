@@ -44,7 +44,7 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btn_vytvorObjednavku" layoutX="1248.0" layoutY="379.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="222.0" style="-fx-background-color: green;" text="Vytvoř objednávku" textFill="WHITE">
+      <Button fx:id="btn_vytvorObjednavku" layoutX="1248.0" layoutY="340.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="222.0" style="-fx-background-color: green;" text="Vytvoř objednávku" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font>
@@ -61,16 +61,16 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btn_korekce" layoutX="997.0" layoutY="379.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" style="-fx-background-color: red;" text="Korekce objednávky" textFill="WHITE">
+      <Button fx:id="btn_korekce" layoutX="997.0" layoutY="340.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" style="-fx-background-color: red;" text="Korekce objednávky" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Button>
-      <TextArea fx:id="ta_informace" editable="false" layoutX="997.0" layoutY="492.0" prefHeight="245.0" prefWidth="474.0">
+      <TextArea fx:id="ta_informace" editable="false" layoutX="997.0" layoutY="443.0" prefHeight="238.0" prefWidth="474.0">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></TextArea>
-      <Button fx:id="btn_zrusitKorekci" layoutX="997.0" layoutY="426.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" style="-fx-background-color: orange;" text="Zrušit korekci" textFill="WHITE">
+      <Button fx:id="btn_zrusitKorekci" layoutX="997.0" layoutY="387.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" style="-fx-background-color: orange;" text="Zrušit korekci" textFill="WHITE">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -80,5 +80,10 @@
             <Font name="Arial Black" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="btn_zpet" layoutX="1250.0" layoutY="699.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" style="-fx-background-color: blue;" text="ZPĚT (RESTAURACE)" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

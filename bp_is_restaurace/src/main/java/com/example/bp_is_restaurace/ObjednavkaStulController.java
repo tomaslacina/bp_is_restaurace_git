@@ -41,6 +41,9 @@ public class ObjednavkaStulController implements Initializable {
     @FXML
     private GridPane gp_tabulkaTlacitek;
 
+    @FXML
+    private Button btn_zpet;
+
 
     private List<Button> seznamTlacitekKategorii = new ArrayList<>();
     private List<Button> seznamTlacitekPolozekMenu = new ArrayList<>();
@@ -151,6 +154,12 @@ public class ObjednavkaStulController implements Initializable {
             }
         });
 
+        btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
+            }
+        });
         btn_vytvorObjednavku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

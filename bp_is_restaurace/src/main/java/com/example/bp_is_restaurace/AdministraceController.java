@@ -28,6 +28,10 @@ public class AdministraceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        if(UvodniObrazovkaController.pozice.equals("Obsluha")){
+            btn_nastaveniRestaurace.setVisible(false);
+        }
+
         btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

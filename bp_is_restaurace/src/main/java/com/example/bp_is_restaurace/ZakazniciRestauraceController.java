@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import org.controlsfx.control.action.Action;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class ZakazniciRestauraceController implements Initializable {
     private int pocitadloSloupce;
     private List<Zakaznik> seznamZakazniku = new ArrayList<>();
     private List<Button> seznamTlacitekZakaznici = new ArrayList<>();
+
+    @FXML
+    private Button btn_zpet;
 
     @FXML
     private GridPane gp_tabulka_zakaznici;
@@ -57,14 +61,22 @@ public class ZakazniciRestauraceController implements Initializable {
 
         for (Button tlacitko: seznamTlacitekZakaznici) {
             gp_tabulka_zakaznici.add(tlacitko,pocitadloSloupce,pocitadloRadky);
-
+            pocitadloSloupce++;
             if(pocitadloSloupce==3){
                 pocitadloSloupce=0;
                 pocitadloRadky++;
             }
-            pocitadloSloupce++;
+
         }
-            gp_tabulka_zakaznici.setHgap(10);
-            gp_tabulka_zakaznici.setVgap(10);
+        gp_tabulka_zakaznici.setHgap(10);
+        gp_tabulka_zakaznici.setVgap(10);
+
+        btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
+
+            }
+        });
     }
 }

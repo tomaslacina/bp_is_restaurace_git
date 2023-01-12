@@ -126,9 +126,10 @@ public class SpravaRezervaciController implements Initializable {
                 List<Rezervace> seznamRezervaci = new ArrayList<Rezervace>();
                 text_area_rezervace.setText("");
                 seznamRezervaci=DbUtils.getRezervaceByJmenoPrijemni(jmeno,prijmeni);
-                text_area_rezervace.appendText("Id\t Datum\t Čas od\t Čas do\t Jméno\t Příjmení \t Kontatk\t Poznámka\t Počet osob\t Stůl\t Uživatel\n");
+                //text_area_rezervace.appendText("Id\t Datum\t Čas od\t Čas do\t Jméno\t Příjmení \t Kontatk\t Poznámka\t Počet osob\t Stůl\t Uživatel\n");
                 for (Rezervace rezervace : seznamRezervaci) {
                     text_area_rezervace.appendText(rezervace.infoRezervace()+"\n");
+                    text_area_rezervace.appendText("------------------------------------------------------------------\n");
                 }
 
             }
@@ -142,9 +143,10 @@ public class SpravaRezervaciController implements Initializable {
                 List<Rezervace> seznamRezervaci = new ArrayList<Rezervace>();
                 text_area_rezervace.setText("");
                 seznamRezervaci=DbUtils.getRezervaceByStul(stul);
-                text_area_rezervace.appendText("Id\t Datum\t Čas od\t Čas do\t Jméno\t Příjmení \t Kontatk\t Poznámka\t Počet osob\t Stůl\t Uživatel\n");
+                //text_area_rezervace.appendText("Id\t Datum\t Čas od\t Čas do\t Jméno\t Příjmení \t Kontatk\t Poznámka\t Počet osob\t Stůl\t Uživatel\n");
                 for (Rezervace rezervace : seznamRezervaci) {
                     text_area_rezervace.appendText(rezervace.infoRezervace()+"\n");
+                    text_area_rezervace.appendText("------------------------------------------------------------------\n");
                 }
 
 

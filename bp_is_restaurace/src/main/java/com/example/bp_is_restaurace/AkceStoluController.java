@@ -43,7 +43,7 @@ public class AkceStoluController implements Initializable {
         btn_vytvorRezervaci.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"formularRezervace.fxml","Rezervační formulář",600,600);
+                ZmenaSceny.zmenScenu(actionEvent,"formularRezervace.fxml","Rezervační formulář",550,700);
 
             }
         });
@@ -72,7 +72,7 @@ public class AkceStoluController implements Initializable {
         btn_platbaJednotlive.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"platbaJednotlive.fxml","Platba jednotlivě",750,1000);
+                ZmenaSceny.zmenScenu(actionEvent,"platbaJednotlive.fxml","Platba jednotlivě",750,1200);
             }
         });
 

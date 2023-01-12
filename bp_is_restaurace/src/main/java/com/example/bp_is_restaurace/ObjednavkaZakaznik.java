@@ -10,6 +10,10 @@ public class ObjednavkaZakaznik {
     private int idZakaznika;
     private int idUzivatele;
 
+    private float cena;
+    private float sazbaDPH;
+    private float celkemZaPolozku;
+
     private String nazevPolozky;
 
     public ObjednavkaZakaznik(int idObjednavky, int pocetKs, Timestamp datumCasObjednani, int idPolozkaMenu, int idZakaznika, int idUzivatele) {
@@ -20,6 +24,19 @@ public class ObjednavkaZakaznik {
         this.idZakaznika = idZakaznika;
         this.idUzivatele = idUzivatele;
     }
+
+    public ObjednavkaZakaznik(int idObjednavky, int pocetKs, int idZakaznika, int idPolozkyMenu, String nazevPolozky, float cena, float celkemZaPolozku, float sazbaDPH) {
+        this.idObjednavky = idObjednavky;
+        this.pocetKs = pocetKs;
+        this.idZakaznika = idZakaznika;
+        this.idPolozkaMenu = idPolozkyMenu;
+        this.nazevPolozky = nazevPolozky;
+        this.cena = cena;
+        this.sazbaDPH = sazbaDPH;
+        this.celkemZaPolozku=celkemZaPolozku;
+    }
+
+
 
     public ObjednavkaZakaznik(int idPolozkaMenu, int pocetKs, String nazevPolozky) {
         this.idPolozkaMenu = idPolozkaMenu;
@@ -46,6 +63,18 @@ public class ObjednavkaZakaznik {
         return idObjednavky;
     }
 
+    public float getCelkemZaPolozku() {
+        return celkemZaPolozku;
+    }
+
+    public float getSazbaDPH() {
+        return sazbaDPH;
+    }
+
+    public float getCena() {
+        return cena;
+    }
+
     public void zvysPocetKs1(){
         this.pocetKs+=1;
     }
@@ -70,6 +99,17 @@ public class ObjednavkaZakaznik {
         final StringBuffer sb = new StringBuffer(idObjednavky+"-"+nazevPolozky+"-"+pocetKs);
         return sb.toString();
     }
+
+
+    public String infoNahledUctenky(){
+        float sazba = sazbaDPH*100;
+        String sazbaProcenta = String.format("%.2f",sazba);
+        StringBuffer sb = new StringBuffer();
+        sb.append(nazevPolozky+"\n");
+        sb.append("Počet:"+pocetKs+" KS\t"+cena+" Kč/Ks\t"+"=\t"+celkemZaPolozku+" Kč\t"+"DPH: "+sazbaProcenta+" %\n");
+        return sb.toString();
+    }
+
 
 
 }

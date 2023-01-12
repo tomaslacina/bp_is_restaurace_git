@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.net.URL;
@@ -11,13 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PlatbaZaCelyStulController implements Initializable {
+public class PlatbaZakaznikaController implements Initializable  {
     private float koeficient21=0.1736f;
     private float koeficient15=0.1304f;
     private float koeficient10=0.0909f;
     public int id_stolu = RestauraceController.id_stolu;
     public int id_uzivatele=DbUtils.getIdPrihlasenehoUzivatele();
-    public int id_restaurace=1;//TODO
+    public int id_zakaznika=ZakazniciRestauraceController.id_zakaznika;
+    public int id_restaurace=1 ; //TODO
 
     @FXML
     private TextArea ta_prehledObjednavek;
@@ -37,7 +40,7 @@ public class PlatbaZaCelyStulController implements Initializable {
     @FXML
     private TextField tf_poznamka;
 
-    private List<ObjednavkaStul> seznamPolozek = new ArrayList<>();
+    private List<ObjednavkaZakaznik> seznamPolozek = new ArrayList<>();
 
     private float cenaCelkem;
 
@@ -53,10 +56,10 @@ public class PlatbaZaCelyStulController implements Initializable {
     private float zaklad21;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize (URL url, ResourceBundle resourceBundle) {
         ta_prehledObjednavek.setText("");
-        id_stolu=RestauraceController.id_stolu;
-        seznamPolozek=DbUtils.getObjednavkyCelehoStolu(id_stolu);
+        seznamPolozek=DbUtils.getObjZakaznika(id_zakaznika);
+        ta_prehledObjednavek.appendText("Id zákazníka:"+id_zakaznika);
         cenaCelkem=0;
         dph10=0;
         dph15=0;
@@ -68,7 +71,7 @@ public class PlatbaZaCelyStulController implements Initializable {
 
         ta_prehledObjednavek.appendText("Hlavička účtenky\n");
         ta_prehledObjednavek.appendText("############################\n");
-        for (ObjednavkaStul objednavka: seznamPolozek) {
+        for (ObjednavkaZakaznik objednavka: seznamPolozek) {
             ta_prehledObjednavek.appendText(objednavka.infoNahledUctenky());
             ta_prehledObjednavek.appendText("\n");
 
@@ -115,6 +118,7 @@ public class PlatbaZaCelyStulController implements Initializable {
         lbl_celkem.setText(String.valueOf(cenaCelkem));
 
 
+
         btn_vystavit_bez_tisku.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -130,7 +134,6 @@ public class PlatbaZaCelyStulController implements Initializable {
 
                 String poznamka = tf_poznamka.getText();
 
-
                 if(DbUtils.vytvorUctenku(cenaCelkem,dph10,dph15,dph21,spropitne,poznamka,id_restaurace,id_uzivatele)==true){
                     id_posledniUctenky=DbUtils.getIdPosledniUctenky(id_restaurace);
                     Alert info = new Alert(Alert.AlertType.INFORMATION);
@@ -138,19 +141,20 @@ public class PlatbaZaCelyStulController implements Initializable {
                     info.setContentText("Účtenka s ID: "+id_posledniUctenky+" byla úspěšně vytvořena vytvořena");
                     info.show();
 
-                    if(DbUtils.vytvorPolozkyUctenky(seznamPolozek,id_posledniUctenky)==true){
+                    if(DbUtils.vytvorPolozkyUctenky(id_posledniUctenky,seznamPolozek)==true){
+                        DbUtils.vymazatZakaznikaRestaurace(id_zakaznika);
                         Alert informace = new Alert(Alert.AlertType.INFORMATION);
                         informace.setTitle("Úspěch");
-                        informace.setContentText("Položky účtenky byly vytvořeny v databázi! \n Zaplacené objednávky stolu byly z DB odstraněny!");
+                        informace.setContentText("Položky účtenky byly vytvořeny v databázi!\n Zaplacené objednávky stolu byly z DB odstraněny!\n Zákazník byl odstraněn");
                         informace.show();
                         ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
+
                     }
                     else{
                         Alert error = new Alert(Alert.AlertType.ERROR);
                         error.setTitle("Chyba");
                         error.setContentText("Položky účtenky nebyly vytvořeny\n záznamny stolu nebyly odstraněny!");
                     }
-
 
                 }
                 else {
@@ -172,7 +176,36 @@ public class PlatbaZaCelyStulController implements Initializable {
             }
         });
 
+        //btn_vystavit_s_tiskem.setOnAction(e->print(ta_prehledObjednavek));
+        btn_vystavit_s_tiskem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                print(ta_prehledObjednavek);
+            }
+        });
+
 
 
     }
+
+
+    private void print(Node node) {
+        System.out.println("Creating a printer job...");
+
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if (job != null) {
+            System.out.println(job.jobStatusProperty().asString());
+
+            boolean printed = job.printPage(node);
+            if (printed) {
+                job.endJob();
+            } else {
+                System.out.println("Printing failed.");
+            }
+        } else {
+            System.out.println("Could not create a printer job.");
+        }
+    }
+
+
 }

@@ -200,7 +200,10 @@ public class PlatbaJednotliveController implements Initializable {
     }
 
     public void vytiskniSeznamObjednavky() {
+
         ta_vypis.setText("");
+        ta_vypis.appendText("Hlavička účtenky\n");
+        ta_vypis.appendText("############################\n");
 
         cenaCelkem=0;
         dph10=0;
@@ -240,6 +243,7 @@ public class PlatbaJednotliveController implements Initializable {
             }
 
         }
+        ta_vypis.appendText("\n");
         ta_vypis.appendText("Celková částka :"+cenaCelkem+" Kč \n");
         ta_vypis.appendText("-*-*-*-*-*-*-*-ROZPIS DPH-*-*-*-*-*-*-*-\n");
         ta_vypis.appendText("DPH 21%:\t"+String.format("%.3f",dph21)+" Kč"+"\t(Základ 21%:"+String.format("%.3f",zaklad21)+")\n");

@@ -1574,6 +1574,71 @@ public class DbUtils {
     }
 
 
+
+    public static List<ObjednavkaZakaznik> getObjZakaznika(int id_zakaznika){
+        List<ObjednavkaZakaznik> seznamObjednavek = new ArrayList<>();
+
+        ObjednavkaZakaznik objednavka;
+        Connection spojeni = null;
+        PreparedStatement psNajdiObjednavkyZakaznika = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiObjednavkyZakaznika = spojeni.prepareStatement("SELECT id_objednavky, pocet_ks, zakaznici_id_zakaznika, polozky_menu_id_polozky, nazev, cena,cena*pocet_ks as celkem_za_polozku, sazba_dph FROM bp_restaurace.objednavky_zakaznik JOIN bp_restaurace.polozky_menu ON polozky_menu_id_polozky=id_polozky WHERE zakaznici_id_zakaznika=?");
+            psNajdiObjednavkyZakaznika.setInt(1,id_zakaznika);
+            System.out.println(psNajdiObjednavkyZakaznika);
+
+            vysledekDotazu = psNajdiObjednavkyZakaznika.executeQuery();
+
+            while (vysledekDotazu.next()){
+                int idObjednavky = vysledekDotazu.getInt("id_objednavky");
+                int pocetKs = vysledekDotazu.getInt("pocet_ks");
+                int id_zakaznikaDb = vysledekDotazu.getInt("zakaznici_id_zakaznika");
+                int idPolozky = vysledekDotazu.getInt("polozky_menu_id_polozky");
+                String nazevPolozky=vysledekDotazu.getString("nazev");
+                float cena = vysledekDotazu.getFloat("cena");
+                float sazbaDPH = vysledekDotazu.getFloat("sazba_dph");
+                float celkemZaPolozku = vysledekDotazu.getFloat("celkem_za_polozku");
+                objednavka = new ObjednavkaZakaznik(idObjednavky,pocetKs,id_zakaznikaDb,idPolozky,nazevPolozky,cena,celkemZaPolozku,sazbaDPH);
+                seznamObjednavek.add(objednavka);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiObjednavkyZakaznika != null){
+                try{
+                    psNajdiObjednavkyZakaznika.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return seznamObjednavek;
+    }
+
+
+
+
+
     public static List<ObjednavkaStul> getObjednavkyCelehoStolu(int id_stolu){
         List<ObjednavkaStul> seznamObjednavek = new ArrayList<>();
 
@@ -1739,6 +1804,26 @@ public class DbUtils {
 
         return smazano;
     }
+
+    public static boolean smazatPolozkuObjednavkyZakazniciById(int id_objednavky){
+        boolean smazano=false;
+        Connection spojeni = null;
+        PreparedStatement psSmazatPolozkuObjednavky = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psSmazatPolozkuObjednavky = spojeni.prepareStatement("DELETE FROM bp_restaurace.objednavky_zakaznik WHERE (id_objednavky = ?)");
+            psSmazatPolozkuObjednavky.setInt(1,id_objednavky);
+            System.out.println(psSmazatPolozkuObjednavky);
+            psSmazatPolozkuObjednavky.executeUpdate();
+            smazano=true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return smazano;
+    }
+
 
 
     public static boolean zamenObjednavkuStolu(int id_stolu_stary, int id_stolu_novy){
@@ -2410,5 +2495,162 @@ public class DbUtils {
     }
 
 
+    public static boolean vytvorPolozkyUctenky(int id_uctenky, List<ObjednavkaZakaznik> seznamObjednavek){
+        boolean vytvoreno=false;
+
+        Connection spojeni = null;
+        PreparedStatement psVytvorPolozkuUctenky = null;
+        ResultSet vysledekDotazu = null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psVytvorPolozkuUctenky = spojeni.prepareStatement("INSERT INTO bp_restaurace.polozky_uctenky (pocet_ks, uctenky_id_uctenky, polozky_menu_id_polozky,cena_ks,skupina_dph) VALUES (?, ?, ?, ?, ?)");
+
+            for (ObjednavkaZakaznik objednavka: seznamObjednavek) {
+                psVytvorPolozkuUctenky.setInt(1,objednavka.getPocetKs());
+                psVytvorPolozkuUctenky.setInt(2,id_uctenky);
+                psVytvorPolozkuUctenky.setInt(3,objednavka.getIdPolozkyMenu());
+                psVytvorPolozkuUctenky.setFloat(4,objednavka.getCena());
+                psVytvorPolozkuUctenky.setFloat(5,objednavka.getSazbaDPH());
+
+                System.out.println(psVytvorPolozkuUctenky);
+                psVytvorPolozkuUctenky.executeUpdate();
+                DbUtils.smazatPolozkuObjednavkyZakazniciById(objednavka.getIdObjednavky());
+            }
+            vytvoreno=true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psVytvorPolozkuUctenky != null){
+                try{
+                    psVytvorPolozkuUctenky.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return vytvoreno;
+    }
+
+
+    public static float getTrzbyZaObdobí(Date datum_od, Date datum_do){
+        float castka=0;
+
+        Rezervace rezervace;
+        Connection spojeni = null;
+        PreparedStatement psNajdiTrzby = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiTrzby = spojeni.prepareStatement("SELECT SUM(castka) as trzba FROM bp_restaurace.uctenky where datum>=? and datum<=?");
+            psNajdiTrzby.setDate(1,datum_od);
+            psNajdiTrzby.setDate(2,datum_do);
+            System.out.println(psNajdiTrzby);
+            vysledekDotazu = psNajdiTrzby.executeQuery();
+
+            while (vysledekDotazu.next()){
+                castka = vysledekDotazu.getInt("trzba");
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        finally {
+
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiTrzby != null){
+                try{
+                    psNajdiTrzby.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        return castka;
+    }
+
+    public static boolean vymazatUctenkuAPolozkyUctenky(int id_uctenky){
+        boolean smazano=false;
+        Connection spojeni = null;
+        PreparedStatement psSmazatUctenku = null;
+        PreparedStatement psSmazatPolozkyUctenky=null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psSmazatPolozkyUctenky=spojeni.prepareStatement("DELETE FROM bp_restaurace.polozky_uctenky WHERE (uctenky_id_uctenky=?) ");
+            psSmazatPolozkyUctenky.setInt(1,id_uctenky);
+            System.out.println(psSmazatPolozkyUctenky);
+            psSmazatPolozkyUctenky.executeUpdate();
+            psSmazatUctenku = spojeni.prepareStatement("DELETE FROM bp_restaurace.uctenky WHERE (id_uctenky = ?)");
+            psSmazatUctenku.setInt(1,id_uctenky);
+            System.out.println(psSmazatUctenku);
+            psSmazatUctenku.executeUpdate();
+
+            smazano=true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return smazano;
+    }
+
+
+    public static boolean vymazatZakaznikaRestaurace(int id_zakaznika){
+        boolean smazano=false;
+        Connection spojeni = null;
+        PreparedStatement psSmazatZakaznika=null;
+
+        try {
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psSmazatZakaznika=spojeni.prepareStatement("DELETE FROM bp_restaurace.zakaznici WHERE (id_zakaznika=?) ");
+            psSmazatZakaznika.setInt(1,id_zakaznika);
+            System.out.println(psSmazatZakaznika);
+            psSmazatZakaznika.executeUpdate();
+            smazano=true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return smazano;
+
+
+
+    }
 
 }

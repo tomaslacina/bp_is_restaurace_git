@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.PokladnaController">
+   <children>
+      <Label layoutX="259.0" layoutY="23.0" text="Pokladna">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="98.0" text="Denní tržba:">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_trzba" layoutX="158.0" layoutY="98.0" text="Label">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <Pane fx:id="pane_administrator" layoutX="20.0" layoutY="179.0" prefHeight="175.0" prefWidth="558.0" style="-fx-background-color: lightgray;">
+         <children>
+            <DatePicker fx:id="dp_datum_od" layoutX="113.0" layoutY="17.0" />
+            <DatePicker fx:id="dp_datum_do" layoutX="113.0" layoutY="63.0" />
+            <Label layoutX="23.0" layoutY="21.0" text="Datum od" />
+            <Label layoutX="23.0" layoutY="67.0" text="Datum do" />
+            <Button fx:id="btn_zobrazTrzbu" layoutX="151.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: green;" text="Zobraz tržbu" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_storno" layoutX="357.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: red;" text="Provést storno účtenky" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <TextField fx:id="tf_storno_uctenky" layoutX="357.0" layoutY="63.0" prefHeight="25.0" prefWidth="169.0" promptText="Zadej ID účtenky pro storno" />
+         </children>
+      </Pane>
+      <Button fx:id="btn_zpet" layoutX="467.0" layoutY="369.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="ZPĚT" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

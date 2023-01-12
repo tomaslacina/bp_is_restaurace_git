@@ -38,6 +38,13 @@ public class AkceZakaznikaController implements Initializable {
             }
         });
 
+        btn_platba.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"platbaZakaznika.fxml","Platba zákazníka",750,1000);
+            }
+        });
+
         btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

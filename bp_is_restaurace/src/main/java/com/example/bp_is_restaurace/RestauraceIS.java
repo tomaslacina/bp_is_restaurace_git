@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class RestauraceIS extends Application {
+public class RestauraceIS extends Application  {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RestauraceIS.class.getResource("prihlasovaci-formular-view.fxml"));
@@ -17,7 +17,7 @@ public class RestauraceIS extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         launch();
     }
 }

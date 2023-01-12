@@ -139,10 +139,10 @@ public class PrehledObjednavekStoluController implements Initializable {
                         info.setTitle("Info");
                         info.setContentText("Položka byla odstraněna");
                         info.show();
-                        ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1200);
+                        ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1500);
                     }
                 } else {
-                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1200);
+                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1500);
                 }
             }
         });
@@ -169,10 +169,10 @@ public class PrehledObjednavekStoluController implements Initializable {
                         info.setTitle("Info");
                         info.setContentText("Záměna provedena");
                         info.show();
-                        ZmenaSceny.zmenScenu(actionEvent,"restaurace.fxml","Restaurace",750,1200);
+                        ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
                     }
                 } else {
-                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1200);
+                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1500);
                 }
 
 
@@ -183,7 +183,7 @@ public class PrehledObjednavekStoluController implements Initializable {
         btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"restaurace.fxml","Restaurace",750,1200);
+                ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
             }
         });
 

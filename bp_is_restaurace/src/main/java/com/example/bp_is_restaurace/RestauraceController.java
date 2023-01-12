@@ -60,14 +60,20 @@ public class RestauraceController implements Initializable {
     private Button btn_zakaznici;
     @FXML
     private Button btn_stav;
+    @FXML
+    private Button btn_pokladna;
+    @FXML
+    private Button btn_zpet;
 
     private List<Button> seznamTlacitekStolu=new ArrayList<>();
+
 
     private boolean zobrazit = true;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         seznamTlacitekStolu.add(btn_salonek);
         seznamTlacitekStolu.add(btn_bar1);
@@ -109,7 +115,7 @@ public class RestauraceController implements Initializable {
         btn_sprava_rezervaci.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"spravaRezervaci.fxml","Správa rezervací",750,1000);
+                ZmenaSceny.zmenScenu(actionEvent,"spravaRezervaci.fxml","Správa rezervací",750,1300);
             }
         });
 
@@ -259,7 +265,7 @@ public class RestauraceController implements Initializable {
         btn_zakaznici.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"zakazniciRestaurace.fxml","Zákazníci restaurace",600,800);
+                ZmenaSceny.zmenScenu(actionEvent,"zakazniciRestaurace.fxml","Zákazníci restaurace",600,900);
             }
         });
 
@@ -296,6 +302,22 @@ public class RestauraceController implements Initializable {
 
             }
         });
+
+        btn_pokladna.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"pokladna.fxml","Pokladní modul",450,600);
+            }
+        });
+
+        btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"uvodniObrazovka.fxml","Úvodní obrazovka",400,600);
+            }
+        });
+
+
 
 
 

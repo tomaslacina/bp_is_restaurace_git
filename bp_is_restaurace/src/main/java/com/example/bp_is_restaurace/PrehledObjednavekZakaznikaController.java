@@ -88,7 +88,7 @@ public class PrehledObjednavekZakaznikaController implements Initializable {
                     info.setTitle("Úspěch");
                     info.setContentText("U objednávky s id: "+id_zvoleneObjednavky+" byl aktualizován původní počet:"+staryPocet+" na:"+novyPocet);
                     info.show();
-                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekZakaznika.fxml","Přehled objednávek zákazníka",750,1200);
+                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekZakaznika.fxml","Přehled objednávek zákazníka",750,1500);
                 }
                 else {
                     Alert error = new Alert(Alert.AlertType.ERROR);
@@ -114,10 +114,10 @@ public class PrehledObjednavekZakaznikaController implements Initializable {
                         info.setTitle("Info");
                         info.setContentText("Položka byla odstraněna");
                         info.show();
-                        ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekZakaznika.fxml","Přehled objednávek zákazníka",750,1200);
+                        ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekZakaznika.fxml","Přehled objednávek zákazníka",750,1500);
                     }
                 } else {
-                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekZakaznika.fxml","Přehled objednávek zákazníka",750,1200);
+                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekZakaznika.fxml","Přehled objednávek zákazníka",750,1500);
                 }
             }
         });
@@ -127,7 +127,7 @@ public class PrehledObjednavekZakaznikaController implements Initializable {
         btn_zpet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ZmenaSceny.zmenScenu(actionEvent,"restaurace.fxml","Restaurace",750,1200);
+                ZmenaSceny.zmenScenuRestaurace(actionEvent,"restaurace.fxml","Restaurace");
             }
         });
 

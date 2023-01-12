@@ -25,8 +25,6 @@ public class UvodniObrazovkaController implements Initializable {
     private Label label_pozice;
 
 
-
-
     @FXML
     private Label label_jmeno;
     @FXML
@@ -41,12 +39,14 @@ public class UvodniObrazovkaController implements Initializable {
 
 
 
+    public static String pozice;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         id_uzivatele = DbUtils.getIdPrihlasenehoUzivatele();
         uzivatel = DbUtils.najdiUzivatele(id_uzivatele);
         this.nastavInformace(uzivatel.getJmeno(),uzivatel.getId_uzivatele(),uzivatel.getOsobniCislo());
         label_pozice.setText(uzivatel.getPozice());
+        pozice=uzivatel.getPozice();
 
 
 
