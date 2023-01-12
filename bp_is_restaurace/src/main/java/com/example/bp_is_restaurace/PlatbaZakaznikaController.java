@@ -59,7 +59,7 @@ public class PlatbaZakaznikaController implements Initializable  {
     public void initialize (URL url, ResourceBundle resourceBundle) {
         ta_prehledObjednavek.setText("");
         seznamPolozek=DbUtils.getObjZakaznika(id_zakaznika);
-        ta_prehledObjednavek.appendText("Id zákazníka:"+id_zakaznika);
+
         cenaCelkem=0;
         dph10=0;
         dph15=0;
@@ -104,6 +104,7 @@ public class PlatbaZakaznikaController implements Initializable  {
         }
         ta_prehledObjednavek.appendText("\n");
         ta_prehledObjednavek.appendText("Celková částka :"+cenaCelkem+" Kč \n");
+        ta_prehledObjednavek.appendText("\n");
         ta_prehledObjednavek.appendText("-*-*-*-*-*-*-*-ROZPIS DPH-*-*-*-*-*-*-*-\n");
         ta_prehledObjednavek.appendText("DPH 21%:\t"+String.format("%.3f",dph21)+" Kč"+"\t(Základ 21%:"+String.format("%.3f",zaklad21)+")\n");
         ta_prehledObjednavek.appendText("DPH 15%:\t"+String.format("%.3f",dph15)+" Kč"+"\t(Základ 15%:"+String.format("%.3f",zaklad15)+")\n");

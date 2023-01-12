@@ -62,7 +62,7 @@ public class PokladnaController implements Initializable {
                 Date datum_od = Date.valueOf(dp_datum_od.getValue());
                 Date datum_do = Date.valueOf(dp_datum_do.getValue());
                 trzba=DbUtils.getTrzbyZaObdobí(datum_od,datum_do);
-                lbl_trzba.setText("Tržba za zvoelné období: "+String.valueOf(trzba)+" Kč");
+                lbl_trzba.setText("Tržba za zvolené období: "+String.valueOf(trzba)+" Kč");
             }
         });
 

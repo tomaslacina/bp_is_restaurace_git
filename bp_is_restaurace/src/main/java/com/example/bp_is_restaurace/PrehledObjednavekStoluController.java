@@ -113,7 +113,7 @@ public class PrehledObjednavekStoluController implements Initializable {
                     info.setTitle("Úspěch");
                     info.setContentText("U objednávky s id: "+id_zvoleneObjednavky+" byl aktualizován původní počet:"+staryPocet+" na:"+novyPocet);
                     info.show();
-                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1200);
+                    ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1500);
                 }
                 else {
                     Alert error = new Alert(Alert.AlertType.ERROR);
