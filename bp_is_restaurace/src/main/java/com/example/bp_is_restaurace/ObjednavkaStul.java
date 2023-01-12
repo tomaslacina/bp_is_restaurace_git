@@ -79,10 +79,18 @@ public class ObjednavkaStul {
         return celkemZaPolozku;
     }
 
+    public String getNazevPolozky() {
+        return nazevPolozky;
+    }
+
     public void zvysPocetKs1(){
         this.pocetKs+=1;
     }
     public void zmensiPocetKs1(){this.pocetKs-=1;}
+
+    public void zvysCelkovouCenu(float cena){
+        this.celkemZaPolozku+=cena;
+    }
 
 
     public String info() {

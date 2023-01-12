@@ -69,6 +69,13 @@ public class AkceStoluController implements Initializable {
             }
         });
 
+        btn_platbaJednotlive.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"platbaJednotlive.fxml","Platba jednotlivě",750,1000);
+            }
+        });
+
 
 
 

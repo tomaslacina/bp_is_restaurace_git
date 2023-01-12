@@ -1635,6 +1635,69 @@ public class DbUtils {
 
     }
 
+    public static boolean existujeObjednavkaStoluByOznazecni(String oznaceni){
+        boolean existuje=false;
+
+        int pocet=0;
+        Connection spojeni = null;
+        PreparedStatement psNajdiObjednavkyStolu = null;
+        ResultSet vysledekDotazu = null;
+
+        try{
+            spojeni = DriverManager.getConnection("jdbc:mysql://localhost:3308/bp_restaurace","root","Root1234");
+            psNajdiObjednavkyStolu = spojeni.prepareStatement("SELECT count(id_objednavky) AS pocet from bp_restaurace.objednavky_stul JOIN bp_restaurace.stoly ON stoly_id_stolu = id_stolu WHERE oznaceni=?");
+            psNajdiObjednavkyStolu.setString(1,oznaceni);
+            System.out.println(psNajdiObjednavkyStolu);
+
+            vysledekDotazu = psNajdiObjednavkyStolu.executeQuery();
+
+            while (vysledekDotazu.next()){
+                pocet = vysledekDotazu.getInt("pocet");
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            if(vysledekDotazu != null){
+                try{
+                    vysledekDotazu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(psNajdiObjednavkyStolu != null){
+                try{
+                    psNajdiObjednavkyStolu.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+
+            if(spojeni != null){
+                try{
+                    spojeni.close();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+        if(pocet>0){
+            existuje=true;
+        }
+        else{
+            existuje=false;
+        }
+
+
+
+
+        return existuje;
+    }
+
 
     public static boolean aktualizujPocetKusuObjednavka(int id_objednavky, int novy_pocet){
         boolean aktualizovano=false;

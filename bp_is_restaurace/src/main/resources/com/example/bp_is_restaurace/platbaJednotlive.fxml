@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="750" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bp_is_restaurace.PlatbaJednotliveController">
+   <children>
+      <GridPane fx:id="gp_polozky" layoutX="22.0" layoutY="60.0" prefWidth="0.0">
+      </GridPane>
+      <TextArea fx:id="ta_vypis" editable="false" layoutX="529.0" layoutY="75.0" prefHeight="660.0" prefWidth="402.0" />
+      <Label layoutX="489.0" layoutY="22.0" text="Platba jednotlivě">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_vystavit_s_tiskem" layoutX="947.0" layoutY="347.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: green;" text="PLATBA S TISKEM ÚČTENKY" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_vystavit_bez_tisku" layoutX="948.0" layoutY="495.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="225.0" style="-fx-background-color: orange;" text="PLATBA BEZ TISKU ÚČTENKY" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_zpet" layoutX="947.0" layoutY="672.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="226.0" style="-fx-background-color: blue;" text="ZPĚT" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="tf_spropitne" layoutX="953.0" layoutY="117.0" prefHeight="26.0" prefWidth="225.0" promptText="Spropitné" />
+      <TextField fx:id="tf_poznamka" layoutX="954.0" layoutY="218.0" prefHeight="26.0" prefWidth="225.0" promptText="Poznámka" />
+      <Label layoutX="1023.0" layoutY="86.0" text="Spropitné">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="1021.0" layoutY="186.0" text="Poznámka">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_celkem" layoutX="954.0" layoutY="293.0" prefHeight="24.0" prefWidth="0.0">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -5,8 +5,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RestauraceController implements Initializable {
@@ -55,10 +58,52 @@ public class RestauraceController implements Initializable {
 
     @FXML
     private Button btn_zakaznici;
+    @FXML
+    private Button btn_stav;
+
+    private List<Button> seznamTlacitekStolu=new ArrayList<>();
+
+    private boolean zobrazit = true;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        seznamTlacitekStolu.add(btn_salonek);
+        seznamTlacitekStolu.add(btn_bar1);
+        seznamTlacitekStolu.add(btn_bar2);
+        seznamTlacitekStolu.add(btn_bar3);
+        seznamTlacitekStolu.add(btn_bar4);
+        seznamTlacitekStolu.add(btn_bar5);
+        seznamTlacitekStolu.add(btn_bar6);
+        seznamTlacitekStolu.add(btn_l1);
+        seznamTlacitekStolu.add(btn_l2);
+        seznamTlacitekStolu.add(btn_l3);
+        seznamTlacitekStolu.add(btn_l4);
+        seznamTlacitekStolu.add(btn_okno1);
+        seznamTlacitekStolu.add(btn_okno2);
+        seznamTlacitekStolu.add(btn_okno3);
+        seznamTlacitekStolu.add(btn_stred1);
+        seznamTlacitekStolu.add(btn_stred2);
+        seznamTlacitekStolu.add(btn_stred3);
+
+        for (Button tlacitko:seznamTlacitekStolu) {
+            String oznaceni = tlacitko.getText();
+
+            if(DbUtils.existujeObjednavkaStoluByOznazecni(oznaceni)==true){
+                tlacitko.setStyle("-fx-background-color: darkred;");
+                tlacitko.setTextFill(Color.WHITE);
+            }
+            else {
+                tlacitko.setStyle("-fx-background-color: green;");
+                tlacitko.setTextFill(Color.WHITE);
+
+            }
+
+
+        }
+
+
         id_stolu=0;//neni nic vybrano
 
         btn_sprava_rezervaci.setOnAction(new EventHandler<ActionEvent>() {
@@ -218,6 +263,39 @@ public class RestauraceController implements Initializable {
             }
         });
 
+
+        btn_stav.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                zobrazit=!zobrazit;
+
+                if(zobrazit==true){
+                    for (Button tlacitko:seznamTlacitekStolu) {
+                        String oznaceni = tlacitko.getText();
+
+                        if(DbUtils.existujeObjednavkaStoluByOznazecni(oznaceni)==true){
+                            tlacitko.setStyle("-fx-background-color: darkred;");
+                            tlacitko.setTextFill(Color.WHITE);
+                        }
+                        else {
+                            tlacitko.setStyle("-fx-background-color: green;");
+                            tlacitko.setTextFill(Color.WHITE);
+
+                        }
+
+                    }
+
+                }
+                else {
+                    for (Button tlacitko:seznamTlacitekStolu) {
+                        tlacitko.setStyle("-fx-background-color: gray;");
+                        tlacitko.setTextFill(Color.WHITE);
+                    }
+
+                }
+
+            }
+        });
 
 
 

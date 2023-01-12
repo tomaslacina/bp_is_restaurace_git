@@ -72,27 +72,27 @@ public class PlatbaZaCelyStulController implements Initializable {
             ta_prehledObjednavek.appendText(objednavka.infoNahledUctenky());
             ta_prehledObjednavek.appendText("\n");
 
-            cenaCelkem+=objednavka.getCena();
+            cenaCelkem+=objednavka.getCelkemZaPolozku();
 
             if(objednavka.getSazbaDPH()==0.21f){
                 vypocitaneDPH=0;
                 vypocitaneDPH=objednavka.getCelkemZaPolozku()*koeficient21;
                 dph21+=vypocitaneDPH;
-                zaklad21+=objednavka.getCena();
+                zaklad21+=objednavka.getCelkemZaPolozku();
 
             }
             else if(objednavka.getSazbaDPH()==0.15f){
                 vypocitaneDPH=0;
                 vypocitaneDPH=objednavka.getCelkemZaPolozku()*koeficient15;
                 dph15+=vypocitaneDPH;
-                zaklad15+=objednavka.getCena();
+                zaklad15+=objednavka.getCelkemZaPolozku();
 
             }
             else if(objednavka.getSazbaDPH()==0.10f){
                 vypocitaneDPH=0;
                 vypocitaneDPH=objednavka.getCelkemZaPolozku()*koeficient10;
                 dph10+=vypocitaneDPH;
-                zaklad10+=objednavka.getCena();
+                zaklad10+=objednavka.getCelkemZaPolozku();
             }
             else{
                 vypocitaneDPH=0;
@@ -102,8 +102,8 @@ public class PlatbaZaCelyStulController implements Initializable {
         ta_prehledObjednavek.appendText("Celková částka :"+cenaCelkem+" Kč \n");
         ta_prehledObjednavek.appendText("-*-*-*-*-*-*-*-ROZPIS DPH-*-*-*-*-*-*-*-\n");
         ta_prehledObjednavek.appendText("DPH 21%:\t"+String.format("%.3f",dph21)+" Kč"+"\t(Základ 21%:"+String.format("%.3f",zaklad21)+")\n");
-        ta_prehledObjednavek.appendText("DPH 15%:\t"+String.format("%.3f",dph15)+" Kč"+"\t(Základ 21%:"+String.format("%.3f",zaklad15)+")\n");
-        ta_prehledObjednavek.appendText("DPH 10%:\t"+String.format("%.3f",dph10)+" Kč"+"\t(Základ 21%:"+String.format("%.3f",zaklad10)+")\n");
+        ta_prehledObjednavek.appendText("DPH 15%:\t"+String.format("%.3f",dph15)+" Kč"+"\t(Základ 15%:"+String.format("%.3f",zaklad15)+")\n");
+        ta_prehledObjednavek.appendText("DPH 10%:\t"+String.format("%.3f",dph10)+" Kč"+"\t(Základ 10%:"+String.format("%.3f",zaklad10)+")\n");
         ta_prehledObjednavek.appendText("-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-\n");
         ta_prehledObjednavek.appendText("Děkujeme za návštěvu\n");
         ta_prehledObjednavek.appendText("Zpracováno informačním systémem pro malé restaurace\n");
