@@ -13,6 +13,14 @@ public class ObjednavkaStul {
 
     private String nazevPolozky;
 
+    private float cena;
+
+    private float sazbaDPH;
+
+    private float celkemZaPolozku;
+
+
+
     //pro potřeby objednávky před vložením do DB
     public ObjednavkaStul(int pocetKs, int idPolozkyMenu, String nazev) {
         this.pocetKs = pocetKs;
@@ -35,6 +43,17 @@ public class ObjednavkaStul {
         this.pocetKs=pocetKs;
     }
 
+    public ObjednavkaStul(int idObjednavky, int pocetKs, int idStolu, int idPolozkyMenu, String nazevPolozky, float cena, float celkemZaPolozku, float sazbaDPH) {
+        this.idObjednavky = idObjednavky;
+        this.pocetKs = pocetKs;
+        this.idStolu = idStolu;
+        this.idPolozkyMenu = idPolozkyMenu;
+        this.nazevPolozky = nazevPolozky;
+        this.cena = cena;
+        this.sazbaDPH = sazbaDPH;
+        this.celkemZaPolozku=celkemZaPolozku;
+    }
+
     public int getPocetKs() {
         return pocetKs;
     }
@@ -45,6 +64,19 @@ public class ObjednavkaStul {
 
     public int getIdObjednavky() {
         return idObjednavky;
+    }
+
+    public float getCena() {
+        return cena;
+    }
+
+    public float getSazbaDPH() {
+        return sazbaDPH;
+    }
+
+
+    public float getCelkemZaPolozku() {
+        return celkemZaPolozku;
     }
 
     public void zvysPocetKs1(){
@@ -62,6 +94,16 @@ public class ObjednavkaStul {
     public String infoPrehled() {
         StringBuffer sb = new StringBuffer();
         sb.append("Počet kusů:"+pocetKs+" Ks\t"+nazevPolozky+"\t\t(objednávka id:"+idObjednavky+")\n");
+        return sb.toString();
+    }
+
+
+    public String infoNahledUctenky(){
+        float sazba = sazbaDPH*100;
+        String sazbaProcenta = String.format("%.2f",sazba);
+        StringBuffer sb = new StringBuffer();
+        sb.append(nazevPolozky+"\n");
+        sb.append("Počet:"+pocetKs+" KS\t"+cena+" Kč/Ks\t"+"=\t"+celkemZaPolozku+" Kč\t"+"DPH: "+sazbaProcenta+" %\n");
         return sb.toString();
     }
 

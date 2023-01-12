@@ -20,6 +20,12 @@ public class AkceStoluController implements Initializable {
 
     @FXML
     private Button btn_prehledObjednavek;
+
+    @FXML
+    private Button btn_platbaCelyStul;
+
+    @FXML
+    private Button btn_platbaJednotlive;
     @FXML
     private Label lbl_akce;
 
@@ -55,6 +61,15 @@ public class AkceStoluController implements Initializable {
                 ZmenaSceny.zmenScenu(actionEvent,"prehledObjednavekStolu.fxml","Přehled objednávek stolu",750,1500);
             }
         });
+
+        btn_platbaCelyStul.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ZmenaSceny.zmenScenu(actionEvent,"platbaZaCelyStul.fxml","Platba za celý stůl",750,1000);
+            }
+        });
+
+
 
 
     }
